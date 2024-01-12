@@ -1,0 +1,418 @@
+openapi: 3.0.0
+servers:
+  - url: /api
+info:
+  version: 1.0.0
+  title: Example City/Weather Application
+  description: An API to provide weather and map information for a city.
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: weather-app
+  schemas:
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    Weather:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        tempActual:
+          type: number
+        humidity:
+          type: number
+        windSpeed:
+          type: number
+        tempFeelsLike:
+          type: number
+        skies:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - name
+        - tempActual
+        - humidity
+        - windSpeed
+        - tempFeelsLike
+        - skies
+    PatchWeather:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        tempActual:
+          type: number
+        humidity:
+          type: number
+        windSpeed:
+          type: number
+        tempFeelsLike:
+          type: number
+        skies:
+          type: string
+      required:
+        - id
+    NewWeather:
+      type: object
+      properties:
+        name:
+          type: string
+        tempActual:
+          type: number
+        humidity:
+          type: number
+        windSpeed:
+          type: number
+        tempFeelsLike:
+          type: number
+        skies:
+          type: string
+      required:
+        - name
+        - tempActual
+        - humidity
+        - windSpeed
+        - tempFeelsLike
+        - skies
+    NewUser:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - username
+        - password
+    GetMapUrlResponse:
+      type: object
+      properties:
+        mapUrl:
+          type: string
+    Location:
+      type: object
+      additionalProperties: true
+      properties:
+        location:
+          type: object
+          properties:
+            lat:
+              type: number
+            lng:
+              type: number
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+paths:
+  /users:
+    post:
+      tags:
+        - Users
+      description: Creates a new user in the system
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+      responses:
+        '201':
+          description: Record created
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      description: Logs a user in using form based parameters
+      operationId: login
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        '200':
+          description: Successful response
+  /auth/logout:
+    post:
+      tags:
+        - Auth
+      description: Logs a user out from their session
+      operationId: logout
+      responses:
+        '200':
+          description: Successful response
+  /geolocation:
+    get:
+      tags:
+        - Geolocation
+      security:
+        - cookieAuth: [ ]
+      description: Returns a geolocation for a given city
+      operationId: getCoordinates
+      parameters:
+        - in: query
+          required: true
+          name: city
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /map:
+    get:
+      tags:
+        - Map
+      security:
+        - cookieAuth: [ ]
+      description: Returns a static map url to embed in a webpage
+      operationId: getMapUrl
+      parameters:
+        - in: query
+          required: true
+          name: city
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMapUrlResponse'
+  /weather:
+    post:
+      tags:
+        - Weather
+      description: Creates a new weather record
+      operationId: createWeather
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewWeather'
+      responses:
+        '201':
+          description: Record created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Weather'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      tags:
+        - Weather
+      security:
+        - cookieAuth: [ ]
+      description: Queries for weather information for a city
+      operationId: queryWeather
+      parameters:
+        - in: query
+          required: true
+          name: city
+          schema:
+            type: string
+        - in: query
+          name: units
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+  /weather/{id}:
+    patch:
+      tags:
+        - Weather
+      description: Partially updates a weather record
+      operationId: patchWeather
+      parameters:
+        - in: path
+          required: true
+          name: id
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchWeather'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - Weather
+      description: Deletes a weather record
+      operationId: deleteWeather
+      parameters:
+        - in: path
+          required: true
+          name: id
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No content
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - Weather
+      description: Update a weather record
+      operationId: updateWeather
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Weather'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Weather'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      tags:
+        - Weather
+      description: Queries for weather information for a city
+      operationId: getWeather
+      parameters:
+        - in: path
+          required: true
+          name: id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Weather'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
