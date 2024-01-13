@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHttpClient } from "../HttpClient";
-import { Box, CircularProgress, Grid, Typography } from "@mui/material";
+import {Alert, AlertTitle, Box, CircularProgress, Grid, Typography} from "@mui/material";
 import Progress from "./Progress";
 import image from "../image.png";
 import image2 from "../image2.png";
@@ -31,22 +31,37 @@ function Weather({ city }) {
     }, [city]);
     return (
         <>
-
             {!loading && weather &&
-                <div className="weather" style={{ padding: '80px' }}>
-                    <h1 className="city">City: {weather.name} </h1>
-                    <h2 className="temp">Temp: {Math.round(weather.tempActual) + " F"}</h2>
-                    <h3 className="humidity">Humidity: {weather.humidity + " % humidity"}</h3>
-                    <h4 className="wind">Wind: {weather.windSpeed + " mph"}</h4>
-                    <h5 className="feelsLike">Feels
-                        like: {Math.round(weather.tempFeelsLike) + " F"}</h5>
-                    <h6 className="clouds">{weather.skies + " skies"}</h6>
-                </div>}
+                <Grid container direction="column" xs={12} justifyContent="center" alignItems="center">
+                    <Grid item>
+                        <h1 className="city">City: {weather.name} </h1>
+                    </Grid>
+                    <Grid item>
+                        <h2 className="temp">Temp: {Math.round(weather.tempActual) + " F"}</h2>
+                    </Grid>
+                    <Grid item>
+                        <h3 className="humidity">Humidity: {weather.humidity + " % humidity"}</h3>
+                    </Grid>
+                    <Grid item>
+                        <h4 className="wind">Wind: {weather.windSpeed + " mph"}</h4>
+                    </Grid>
+                    <Grid item>
+                        <h5 className="feelsLike">Feels
+                            like: {Math.round(weather.tempFeelsLike) + " F"}</h5>
+                    </Grid>
+                    <Grid item>
+                        <h6 className="clouds">{weather.skies + " skies"}</h6>
+                    </Grid>
+                </Grid>}
             {error &&
-                <div className="error">
-                    <h1>Could not fetch the weather due to server error:</h1>
-                    <h2>{error.message}</h2>
-                </div>}
+                <Grid container direction="column" alignItems="center" justifyContent="center">
+                    <Grid item fullWidth>
+                    <Alert fullWidth severity="error" sx={{margin: '10px', width: '100%', minHeight: '85px'}}>
+                        <AlertTitle>Error Fetching Weather</AlertTitle>
+                        {error.message}
+                    </Alert>
+                    </Grid>
+                </Grid>}
             {loading && !weather &&
                 <Progress title="Fetching weather..." />}
         </>

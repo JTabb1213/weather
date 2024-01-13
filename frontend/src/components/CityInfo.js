@@ -3,7 +3,7 @@ import Weather from "./Weather";
 import Map from "./Map";
 import Events from "./Events";
 import {useSearchParams} from "react-router-dom";
-import {Button, Grid, Paper, TextField} from "@mui/material";
+import {Box, Button, Grid, Paper, TextField} from "@mui/material";
 
 
 function CityInfo() {
@@ -42,19 +42,19 @@ function CityInfo() {
                         <Button fullWidth variant="contained" onClick={handleSearch}>Search</Button>
                     </Grid>
                 </Grid>
-                {city && <Grid item container sx={{marginTop: '10px'}} spacing={10} justifyContent="center">
+                {city && <Grid item container spacing={8} justifyContent="center">
                     <Grid item xs={12} container sx={{maxHeight: '425px'}}>
                         <Events city={city}/>
                     </Grid>
                     <Grid item>
-                        <Paper elevation={1}>
+                        <Paper elevation={4} sx={{width: '100%'}}>
                             <Grid item container alignItems="center" justifyContent="center" spacing={5} xs={12}>
                                 <Grid item container
-                                      sx={{paddingTop: '0px !important', minHeight: '400px', minWidth: '400px'}} xs={6}>
+                                      sx={{padding: '0px !important', minHeight: '400px', minWidth: '400px'}} xs={6}>
                                     <Weather city={city}/>
                                 </Grid>
                                 <Grid item container
-                                      sx={{paddingTop: '0px !important', minHeight: '400px', minWidth: '400px'}} xs={6}>
+                                      sx={{padding: '0px !important', minHeight: '400px', minWidth: '400px'}} xs={6}>
                                     <Map city={city}/>
                                 </Grid>
                             </Grid>

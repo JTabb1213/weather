@@ -31,12 +31,14 @@ export default function Events({city}) {
 
     return <>
         {events &&
-            <Grid container sx={{overflow: 'scroll'}}>
+            <Grid container>
                 <Grid item>
-                    {events.length > 0 && <h2 className={styles.eventsSectionTitle}>Upcoming Events</h2>}
+                    <h2 className={styles.eventsSectionTitle}>Upcoming Events</h2>
                 </Grid>
-                <Grid item container direction="column">
-                    {events.map((event, i) => <Grid item xs={12}><EventCard key={i} event={event}/> </Grid>)}
+                <Grid item container direction="column" sx={{overflow: 'scroll'}}>
+                    {events.length > 0 ?
+                        events.map((event, i) => <Grid item xs={12}><EventCard key={i} event={event}/> </Grid>)
+                        : <h3 style={{paddingLeft: '40px'}}>There are no events for this location</h3>}
                 </Grid>
             </Grid>
         }
