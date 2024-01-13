@@ -56,7 +56,7 @@ Password: password
 
 Then, create a new database called ‘weather’, and import the db.sql file, click ‘execute’, and you should have two tables, one for users and one for weather
 
-##Reflection
+## Reflection
 
 This project was created to learn and apply industry standard software engineering concepts, technology, and design. I gained valuable information through implementing rest apis, user authentication, databases, front end development, and practicing good design organization. 
 
