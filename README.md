@@ -65,7 +65,7 @@ Rest apis
 
 
 * My backend is built as a rest api, using node.js and express.js. This involved creating various endpoints to handle different types of requests.
-* I have done this to provide a standardized interface for clients such as my frontend to use http requests to communicate with components in my backend. 
+* I have done this to provide a standardized interface for clients such as my frontend to communicate with components in my backend. 
 * I have implemented 5 http methods: get, put, post, delete, and patch. Each endpoint, when called upon, will handle the request accordingly, performing operations such as updating a database with user/weather information, or getting real time weather information. 
 * I have added OAS (open api spec) support to the api, the official contract can be viewed here: [https://jtabb1213.github.io/weather/#/](https://jtabb1213.github.io/weather/#/)
 * I have a variety of providers set up to get information from, including a google map api, two real time weather apis, and a personal database. 
