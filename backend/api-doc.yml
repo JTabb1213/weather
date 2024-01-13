@@ -132,6 +132,8 @@ paths:
     get:
       tags:
         - Events
+      security:
+        - cookieAuth: []
       description: Queries for events
       operationId: queryEvents
       parameters:
