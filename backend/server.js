@@ -85,6 +85,7 @@ initialize({
         { path: '/weather/{id}', module: require('./paths/weather') },
         { path: '/weather', module: require('./paths/weather')},
         { path: '/map', module: require('./paths/map')},
+        { path: '/events', module: require('./paths/events')},
         { path: '/users', module: require('./paths/users')},
         { path: '/auth/login', module: require('./paths/auth')},
         { path: '/auth/logout', module: require('./paths/auth')},

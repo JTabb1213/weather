@@ -1,29 +1,9 @@
 //import pkg from 'pg';
-const { Client } = require('pg');
+const axios  = require('axios');
 
 
-const client = new Client({
-        host: 'localhost',
-        user: 'admin',
-        password: 'password',
-        database: 'weather',
-        port: '5432',
-});
+axios.get('https://app.ticketmaster.com/discovery/v2/events?city=Chicago&apikey=1AN7L3M4BCM3AMiuIT2SMW4lS1XxnuW7' , {
 
-client.connect();
-
-client.query(`INSERT INTO users(username, password, \"createdAt\", \"updatedAt\") VALUES ('test', 'test', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`, (err, res) => {
-        if (!err) {
-                if (res.rowCount === 0) {
-                        console.log('no user added');
-                }
-                else {
-                        console.log(res.rows);
-                }
-        } else {
-                console.log(err.message);
-        }
-
-        client.end();
-});
-
+}).then(result => {
+        console.log('Result: ', result);
+})

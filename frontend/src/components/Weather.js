@@ -41,22 +41,6 @@ function Weather({ city }) {
                     <h5 className="feelsLike">Feels
                         like: {Math.round(weather.tempFeelsLike) + " F"}</h5>
                     <h6 className="clouds">{weather.skies + " skies"}</h6>
-
-                    {weather.tempActual > 40 ? (
-                        <div>
-                            Fun activities given current temperature:
-                            <br />
-                            -apple picking
-                            <img src={image} style={{ width: '400px', height: '400px' }} />
-                        </div>
-                    ) : (
-                        <div>
-                            Fun activities given current temperature:
-                            <br />
-                            -drink hot chocolate
-                            <img src={image2} style={{ width: '400px', height: '400px' }} />
-                        </div>
-                    )}
                 </div>}
             {error &&
                 <div className="error">

@@ -1,8 +1,9 @@
 {
   "providers": {
-    "weather": "localdb",
+    "weather": "openweathermap",
     "location": "googleapi",
-    "map": "googlemapapi"
+    "map": "googlemapapi",
+    "events" : "ticketmaster"
   },
   "database": {
     "port": "5432",

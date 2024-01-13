@@ -115,12 +115,38 @@ components:
               type: number
             lng:
               type: number
+    Event:
+      type: object
+      properties: {}
+    EventQueryResult:
+      type: array
+      items:
+        $ref: '#/components/schemas/Event'
     Error:
       type: object
       properties:
         message:
           type: string
 paths:
+  /events:
+    get:
+      tags:
+        - Events
+      description: Queries for events
+      operationId: queryEvents
+      parameters:
+        - in: query
+          name: city
+          required: true
+          schema:
+            type: string
+      responses:
+        '200' :
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventQueryResult'
   /users:
     post:
       tags:

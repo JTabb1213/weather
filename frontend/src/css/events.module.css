@@ -1,0 +1,28 @@
+.eventCardContent {
+    font-size: 16px;
+    font-family: Averta, helvetica, arial, sans-serif;
+
+}
+
+.eventCardContent:last-child {
+    padding-bottom: 10px !important;
+
+}
+
+.eventCardTitle {
+    font-weight: bold;
+    font-size: 18px;
+
+}
+.eventsSectionTitle {
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding-left: 10px;
+}
+
+.eventCardGenre {
+    color: rgb(100, 100, 100);
+    font-size: 14px;
+}
