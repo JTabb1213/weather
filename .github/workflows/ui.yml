@@ -1,0 +1,32 @@
+name: website-build-deploy
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - frontend/**
+    branches:
+      - main
+env:
+  CI: false
+jobs:
+  build--deploy-website:
+    name: Build deploy website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - id: 'auth'
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+      - name: Build Website
+        working-directory: frontend
+        run: |-          
+          npm i
+          CI=false npm run build
+      - name: Deploy Website
+        working-directory: ./ui
+        run: |-
+          gsutil -m rsync -R dist gs://weather-app-ui
