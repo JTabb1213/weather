@@ -37,7 +37,7 @@ jobs:
     # Deploy the Docker image to cloud run
     - name: Deploy
       run: |
-        gcloud run deploy ${{ secrets.GCP_SERVICE }} --image ${{env.IMAGE_NAME}} \
+        gcloud run deploy weather-app --image ${{env.IMAGE_NAME}} \
         --platform managed \
         --region us-west2 \
         --port 7007 \
