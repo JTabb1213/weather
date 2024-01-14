@@ -9,7 +9,7 @@ env:
   IMAGE_NAME: gcr.io/weather-app-410220/weather-app
 jobs:
   build--deploy-web-service:
-    name: Build web service
+    name: Build and deploy web service
     runs-on: ubuntu-latest
     steps:        
     - name: Checkout
@@ -40,6 +40,6 @@ jobs:
         gcloud run deploy weather-app --image ${{env.IMAGE_NAME}} \
         --platform managed \
         --region us-west2 \
-        --port 7007 \
+        --port 4000 \
         --allow-unauthenticated \
         --memory 512M
