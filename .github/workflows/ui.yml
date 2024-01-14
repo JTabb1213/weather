@@ -27,6 +27,6 @@ jobs:
           npm i
           CI=false npm run build
       - name: Deploy Website
-        working-directory: ./ui
+        working-directory: ./frontend/build
         run: |-
           gsutil -m rsync -R dist gs://weather-app-ui
