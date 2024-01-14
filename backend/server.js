@@ -25,7 +25,7 @@ app.use(
 app.use('/', express.static('../frontend/build'))
 app.use(bodyParser.json());
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 // enable this if you run behind a proxy (e.g. nginx)
 app.set('trust proxy', 1);
 
@@ -47,15 +47,15 @@ redisClient.on('connect', function (err) {
 
 //Configure session middleware
 app.use(session({
-    store: new RedisStore({ client: redisClient }),
+    store: new RedisStore({client: redisClient}),
     secret: 'secret$%^134',
     resave: false,
     name: 'weather-app',
     saveUninitialized: false,
     cookie: {
-        secure: false, // if true only transmit cookie over https
-        httpOnly: false, // if true prevent client side JS from reading the cookie
-        maxAge: 1000 * 60 * 10 // session max age in miliseconds
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 8600000
     }
 }));
 
@@ -75,26 +75,26 @@ function errorHandler(err, req, res, next) {
         statusCode = StatusCodes.NOT_IMPLEMENTED;
         message = ReasonPhrases.NOT_IMPLEMENTED;
     }
-    res.status(statusCode).json({ message: message });
+    res.status(statusCode).json({message: message});
 }
 
-const { initialize } = require('express-openapi');
+const {initialize} = require('express-openapi');
 initialize({
     app,
     apiDoc: './api-doc.yml',
     paths: [
-        { path: '/weather/{id}', module: require('./paths/weather') },
-        { path: '/weather', module: require('./paths/weather')},
-        { path: '/map', module: require('./paths/map')},
-        { path: '/events', module: require('./paths/events')},
-        { path: '/users', module: require('./paths/users')},
-        { path: '/auth/login', module: require('./paths/auth')},
-        { path: '/auth/logout', module: require('./paths/auth')},
-        { path: '/geolocation', module: require('./paths/location')}
+        {path: '/weather/{id}', module: require('./paths/weather')},
+        {path: '/weather', module: require('./paths/weather')},
+        {path: '/map', module: require('./paths/map')},
+        {path: '/events', module: require('./paths/events')},
+        {path: '/users', module: require('./paths/users')},
+        {path: '/auth/login', module: require('./paths/auth')},
+        {path: '/auth/logout', module: require('./paths/auth')},
+        {path: '/geolocation', module: require('./paths/location')}
     ],
     exposeApiDocs: false,
     securityHandlers: {
-        cookieAuth: function(req, scopes, definition) {
+        cookieAuth: function (req, scopes, definition) {
             return Promise.resolve(req.session.user);
         }
     },
