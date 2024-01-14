@@ -5,4 +5,4 @@ COPY backend/package.json backend/package-lock.json ./
 RUN npm install
 COPY backend/ ./
 EXPOSE 4000
-CMD [ "npm", "start"]
+CMD [ "node", "server.js"]
