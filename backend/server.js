@@ -22,6 +22,7 @@ app.use(
     })
 );
 
+app.use('/', express.static('../frontend/build'))
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
