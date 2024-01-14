@@ -1,4 +1,4 @@
-name: website-build-deploy
+name: ui-build-deploy
 on:
   workflow_dispatch:
   push:
