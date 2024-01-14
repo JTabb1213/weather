@@ -30,7 +30,11 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
         registry-url: https://registry.npmjs.org/ # Needed for auth
-    - name: Build local artifacts
+    - name: Build web assets
+      working-directory: frontend
+      run: |
+        npm run build
+    - name: Build container and push to GCR
       run: |        
         docker build . -f ./Dockerfile --tag ${{env.IMAGE_NAME}}
         docker push ${{env.IMAGE_NAME}}      
