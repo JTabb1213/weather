@@ -7,6 +7,7 @@ on:
 env:
   NODE_VERSION: 20.2.0
   IMAGE_NAME: gcr.io/weather-app-410220/weather-app
+  CI: false
 jobs:
   build--deploy-web-service:
     name: Build and deploy web service
@@ -34,7 +35,7 @@ jobs:
       working-directory: frontend
       run: |
         npm i
-        npm run build
+        CI=false npm run build
     - name: Build container and push to GCR
       run: |        
         docker build . -f ./Dockerfile --tag ${{env.IMAGE_NAME}}
