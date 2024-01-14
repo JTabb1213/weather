@@ -33,6 +33,7 @@ jobs:
     - name: Build web assets
       working-directory: frontend
       run: |
+        npm i
         npm run build
     - name: Build container and push to GCR
       run: |        
