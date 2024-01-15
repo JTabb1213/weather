@@ -52,6 +52,7 @@ app.use(session({
     name: 'weather-app',
     saveUninitialized: false,
     cookie: {
+        sameSite: "none",
         secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
         maxAge: 8600000
