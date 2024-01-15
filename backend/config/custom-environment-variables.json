@@ -1,4 +1,9 @@
 {
+  "providers": {
+    "weather": "WEATHER_PROVIDER",
+    "map": "MAP_PROVIDER",
+    "events" : "EVENT_PROVIDER"
+  },
   "database": {
     "port": "DB_PORT",
     "host": "DB_HOST",

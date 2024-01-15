@@ -11,6 +11,10 @@ components:
       type: apiKey
       in: cookie
       name: weather-app
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
   schemas:
     Login:
       type: object
@@ -328,6 +332,8 @@ paths:
     post:
       tags:
         - Weather
+      security:
+        - apiKeyAuth: []
       description: Creates a new weather record
       operationId: createWeather
       requestBody:
@@ -379,6 +385,8 @@ paths:
     patch:
       tags:
         - Weather
+      security:
+        - apiKeyAuth: []
       description: Partially updates a weather record
       operationId: patchWeather
       parameters:
@@ -421,6 +429,8 @@ paths:
     delete:
       tags:
         - Weather
+      security:
+        - apiKeyAuth: []
       description: Deletes a weather record
       operationId: deleteWeather
       parameters:
@@ -453,6 +463,8 @@ paths:
     put:
       tags:
         - Weather
+      security:
+        - apiKeyAuth: []
       description: Update a weather record
       operationId: updateWeather
       requestBody:
@@ -489,6 +501,8 @@ paths:
     get:
       tags:
         - Weather
+      security:
+        - apiKeyAuth: []
       description: Queries for weather information for a city
       operationId: getWeather
       parameters:

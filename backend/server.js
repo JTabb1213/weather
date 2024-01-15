@@ -14,6 +14,9 @@ const YAML = require('yamljs');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = YAML.load('./api-doc.yml');
 const app = express();
+// This is a hard coded api key that is used for authentication to the set of REST APIs
+const API_KEY = 'b0ea62c7-1388-4411-aefe-1cfd554aa17f';
+const API_KEY_HEADER_NAME = 'X-API-Key';
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(
     cors({
@@ -77,6 +80,10 @@ function errorHandler(err, req, res, next) {
     }
     res.status(statusCode).json({message: message});
 }
+async function isApiAuthenticated(req) {
+    const key = req.get(API_KEY_HEADER_NAME);
+    return Promise.resolve(key && key === API_KEY);
+}
 
 const {initialize} = require('express-openapi');
 initialize({
@@ -97,7 +104,8 @@ initialize({
     securityHandlers: {
         cookieAuth: function (req, scopes, definition) {
             return Promise.resolve(req.session.user);
-        }
+        },
+        apiKeyAuth: isApiAuthenticated
     },
     errorMiddleware: errorHandler
 });
