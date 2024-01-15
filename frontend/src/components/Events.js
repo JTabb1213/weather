@@ -11,7 +11,7 @@ export default function Events({events}) {
                 </Grid>
                 <Grid item container direction="row" sx={{overflow: 'scroll', flexWrap: 'nowrap'}} >
                     {events.length > 0 ?
-                        events.map((event, i) => <Grid item xs={12} ><EventCard key={i} event={event}/> </Grid>)
+                        events.map((event, i) => <Grid item><EventCard key={i} event={event}/> </Grid>)
                         : <h3 style={{paddingLeft: '40px'}}>There are no events for this location</h3>}
                 </Grid>
             </Grid>
