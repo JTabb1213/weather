@@ -4,7 +4,7 @@ function Weather({weather}) {
     return (
         <>
             {weather &&
-                <Grid container direction="column" xs={12} justifyContent="center" alignItems="center">
+                <Grid container direction="column" justifyContent="center" alignItems="center">
                     <Grid item>
                         <h1 className="city">City: {weather.name} </h1>
                     </Grid>

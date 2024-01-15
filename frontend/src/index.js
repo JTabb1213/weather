@@ -29,8 +29,11 @@ function AppLayout() {
     }
 
     return <div>
-        <AppBar component="nav">
-            <Toolbar>
+        <AppBar component="nav" position="fixed"
+                sx={{
+                    width: '100%',
+                }}>
+            <Toolbar sx={{paddingLeft: {xs : '2px !important' , sm: '24px !important'}}}>
                 <IconButton
                     color="inherit"
                 >
@@ -39,11 +42,11 @@ function AppLayout() {
                 <Typography
                     variant="h6"
                     component="div"
-                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                    sx={{ flexGrow: 1 }}
                 >
                     Jack's Weather App
                 </Typography>
-                <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <Box>
                     <Button onClick={handleLogout} sx={{ color: '#fff' }}>
                         Logout
                     </Button>

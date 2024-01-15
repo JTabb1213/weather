@@ -6,7 +6,7 @@ import {useSearchParams} from "react-router-dom";
 import {Alert, AlertTitle, Button, Grid, Paper, TextField} from "@mui/material";
 import {useHttpClient} from "../HttpClient";
 import Progress from "./Progress";
-
+import styles from '../css/cityinfo.module.css';
 
 function CityInfo() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -52,9 +52,9 @@ function CityInfo() {
         setCity(cityInput);
     };
     return (
-        <div id="container">
-            <Grid container spacing={2} direction="column" alignItems="center" justifyContent="center">
-                <Grid item container align="center" spacing={1} justifyContent="center">
+        // <div id="container">
+            <Grid container direction="column" alignItems="center" justifyContent="center" sx={{paddingBottom: '10px'}}>
+                <Grid item container align="center" spacing={1} justifyContent="center" xs={12}>
                     <Grid item>
                         <TextField
                             sx={{backgroundColor: '#fff'}}
@@ -76,30 +76,27 @@ function CityInfo() {
                     </Alert>
                 </Grid>}
 
-                {cityInfo && <Grid item container spacing={8} justifyContent="center">
+                {cityInfo && <Grid container justifyContent="center" xs={12} sx={{marginTop: '30px'}}>
                     <Grid item xs={12} container sx={{maxHeight: '425px'}}>
                         <Events events={cityInfo.events}/>
                     </Grid>
-                    <Grid item>
-                        <Paper elevation={4} sx={{width: '100%'}}>
-                            <Grid item container alignItems="center" justifyContent="center" spacing={5} xs={12}>
-                                <Grid item container
-                                      sx={{padding: '0px !important', minHeight: '400px', minWidth: '400px'}} xs={6}>
-                                    <Weather weather={cityInfo.weather}/>
-                                </Grid>
-                                <Grid item container
-                                      sx={{padding: '0px !important', minHeight: '400px', minWidth: '400px'}} xs={6}>
-                                    <Map map={cityInfo.map}/>
-                                </Grid>
-                            </Grid>
-                        </Paper>
+                    <Grid item container className={styles.weatherAndMap}
+                          direction="row" xs={11} lg={8} sx={{marginTop: '20px'}}>
+                        <Grid item container
+                              sx={{padding: '0px !important'}} xs={12} sm={12} md={6}>
+                            <Weather weather={cityInfo.weather}/>
+                        </Grid>
+                        <Grid item
+                              sx={{padding: '0px !important'}} xs={12} sm={12} md={6}>
+                            <Map map={cityInfo.map}/>
+                        </Grid>
                     </Grid>
                 </Grid>}
 
             </Grid>
 
 
-        </div>
+        // </div>
     );
 }
 
