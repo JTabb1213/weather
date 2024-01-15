@@ -52,7 +52,7 @@ app.use(session({
     name: 'weather-app',
     saveUninitialized: false,
     cookie: {
-        sameSite: "none",
+        sameSite: process.env.NODE_ENV === 'production' && "none",
         secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
         maxAge: 8600000
@@ -90,7 +90,8 @@ initialize({
         {path: '/users', module: require('./paths/users')},
         {path: '/auth/login', module: require('./paths/auth')},
         {path: '/auth/logout', module: require('./paths/auth')},
-        {path: '/geolocation', module: require('./paths/location')}
+        {path: '/geolocation', module: require('./paths/location')},
+        {path: '/city-info', module: require('./paths/cityInfo')}
     ],
     exposeApiDocs: false,
     securityHandlers: {

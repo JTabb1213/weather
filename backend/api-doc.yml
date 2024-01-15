@@ -115,25 +115,97 @@ components:
               type: number
             lng:
               type: number
+    EventClassification:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    EventImage:
+      type: object
+      properties:
+        ratio:
+          type: string
+        url:
+          type: string
+        width:
+          type: number
+        height:
+          type: number
+        fallback:
+          type: boolean
     Event:
       type: object
-      properties: {}
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        id:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventImage'
+        classifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventClassification'
+        date:
+          type: string
     EventQueryResult:
       type: array
       items:
         $ref: '#/components/schemas/Event'
+    CityInfo:
+      type: object
+      properties:
+        weather:
+           $ref: '#/components/schemas/Weather'
+        map:
+           $ref: '#/components/schemas/GetMapUrlResponse'
+        events:
+            $ref: '#/components/schemas/EventQueryResult'
     Error:
       type: object
       properties:
         message:
           type: string
 paths:
+  /city-info:
+    get:
+      tags:
+        - CityInfo
+      security:
+        - cookieAuth: []
+      description: Queries for city info
+      operationId: getCityInfo
+      parameters:
+        - in: query
+          name: city
+          required: true
+          schema:
+            type: string
+      responses:
+        '200' :
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityInfo'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /events:
     get:
       tags:
         - Events
-#      security:
-#        - cookieAuth: []
+      security:
+        - cookieAuth: []
       description: Queries for events
       operationId: queryEvents
       parameters:
@@ -149,6 +221,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EventQueryResult'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /users:
     post:
       tags:

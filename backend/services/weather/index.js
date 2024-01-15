@@ -9,7 +9,7 @@ const provider = config.get("providers.weather");
 _delegate = require(`./providers/${provider}`)
 
 console.log(`Using ${provider} as the weather service provider`);
-async function queryWeather(units, city) {
+async function queryWeather(city, units) {
     return _delegate.queryWeather.apply(_delegate, arguments);
 }
 

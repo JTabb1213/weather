@@ -6,9 +6,7 @@ function getMapUrl(req, res, next) {
         if (!result) {
             return res.status(StatusCodes.BAD_REQUEST).json({ message: 'City not found, or there were more than 1 candidates' });
         }
-        res.json({
-            mapUrl: result
-        });
+        res.json(result);
     }).catch(next);
 }
 
