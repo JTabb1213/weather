@@ -17,10 +17,7 @@ const app = express();
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(
     cors({
-        origin: "http://localhost:3000",
-        credentials: true,
-    }, {
-        origin: "https://jacktabb.net",
+        origin: ["http://localhost:3000","https://jacktabb.net"],
         credentials: true,
     })
 );
