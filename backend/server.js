@@ -19,10 +19,12 @@ app.use(
     cors({
         origin: "http://localhost:3000",
         credentials: true,
+    }, {
+        origin: "https://jacktabb.net",
+        credentials: true,
     })
 );
 
-app.use('/', express.static('../frontend/build'))
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({extended: true}));
