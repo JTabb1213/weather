@@ -42,7 +42,7 @@ export default function Login() {
     }
 
     return <div>
-        <Container sx={{ width: { xs: "90%", sm: '60%', md: '60%', lg: '50%', xl: '35%' }, marginTop: '200px' }}>
+        <Container sx={{ width: { xs: "90%", sm: '60%', md: '60%', lg: '50%', xl: '35%' }, marginTop: {xs: '20px', sm: '20px', md: '150px'}}}>
             <Paper elevation={5} sx={{ padding: '40px' }}>
                 <Grid container
                     alignItems="center"
