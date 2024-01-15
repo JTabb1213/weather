@@ -29,4 +29,4 @@ jobs:
       - name: Deploy Website
         working-directory: frontend
         run: |-
-          gsutil -m rsync -R build gs://weather-app-ui/weather
+          gsutil -m rsync -R build gs://jacktabb-net
