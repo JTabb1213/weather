@@ -6,9 +6,7 @@ import {Grid} from "@mui/material";
 
 
 export default function Home() {
-    const navigate = useNavigate();
-    const location = useLocation();
-    return <Grid direction="column" container sx={{height: '100%'}}>
+    return <Grid direction="column" container sx={{height: '100%', flexWrap: 'nowrap'}}>
         <Grid item container xs={4}>
             <About/>
         </Grid>

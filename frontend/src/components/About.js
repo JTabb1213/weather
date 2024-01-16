@@ -3,7 +3,7 @@ import styles from "../css/app.module.css";
 import aboutStyles from "../css/about.module.css";
 
 export default function About() {
-    return <Grid container direction="column" alignItems="center" justifyContent="center">
+    return <Grid container direction="column" alignItems="center" justifyContent="center" sx={{paddingBottom: '10px'}}>
         <h5 className={styles.sectionTitle}>About</h5>
         <h1 className={styles.sectionIntro}>Let me introduce myself.</h1>
         <Grid item container justifyContent="center" alignContent="center">
