@@ -1,32 +1,19 @@
 import React from "react";
-import CityInfo from "../components/CityInfo";
-import '../App.css';
-import {useHttpClient} from "../HttpClient";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import About from "../components/About";
+import Projects from "../components/Projects";
+import {Grid} from "@mui/material";
 
 
 export default function Home() {
-    const httpClient = useHttpClient();
     const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
-
-    const handleLogout = () => {
-        httpClient.post('/api/logout', {
-        }, {
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            }
-        }).then(result => {
-            //const originalUrl = searchParams.get('original_url') || '/';
-            navigate('');
-        }).catch(err => {
-            console.error("logout failed", err)
-        })
-    }
-
-    return (
-        <div>
-            <CityInfo />
-        </div>
-    );
+    const location = useLocation();
+    return <Grid direction="column" container sx={{height: '100%'}}>
+        <Grid item container xs={4}>
+            <About/>
+        </Grid>
+        <Grid item container xs={8}>
+            <Projects/>
+        </Grid>
+    </Grid>
 }

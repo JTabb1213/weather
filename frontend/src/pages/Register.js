@@ -1,8 +1,8 @@
-import { useHttpClient } from "../HttpClient";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { useState } from "react";
-import { Alert, Box, Button, CircularProgress, Container, Grid, Paper, TextField } from "@mui/material";
-import { green } from "@mui/material/colors";
+import {useHttpClient} from "../HttpClient";
+import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
+import {useState} from "react";
+import {Alert, Box, Button, CircularProgress, Container, Grid, Paper, TextField} from "@mui/material";
+import {green} from "@mui/material/colors";
 import styles from "../css/login.module.css";
 
 export default function Register() {

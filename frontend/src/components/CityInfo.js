@@ -3,7 +3,7 @@ import Weather from "./Weather";
 import Map from "./Map";
 import Events from "./Events";
 import {useSearchParams} from "react-router-dom";
-import {Alert, AlertTitle, Button, Grid, Paper, TextField} from "@mui/material";
+import {Alert, AlertTitle, Button, Grid, TextField} from "@mui/material";
 import {useHttpClient} from "../HttpClient";
 import Progress from "./Progress";
 import styles from '../css/cityinfo.module.css';
@@ -52,7 +52,6 @@ function CityInfo() {
         setCity(cityInput);
     };
     return (
-        // <div id="container">
             <Grid container direction="column" alignItems="center" justifyContent="center" sx={{paddingBottom: '10px'}}>
                 <Grid item container align="center" spacing={1} justifyContent="center" xs={12}>
                     <Grid item>
@@ -94,9 +93,6 @@ function CityInfo() {
                 </Grid>}
 
             </Grid>
-
-
-        // </div>
     );
 }
 

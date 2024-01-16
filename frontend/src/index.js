@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-//import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import { BrowserRouter, Outlet, Route, Routes, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { AppBar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
 import { useHttpClient } from "./HttpClient";
 import Register from "./pages/Register";
-import WelcomePage from "./pages/WelcomePage";
+import { HashLink as Link } from 'react-router-hash-link';
 import ForgotPassword from "./pages/ForgotPassword";
-
-function AppLayout() {
+import City from "./pages/City";
+import styles from './css/app.module.css';
+function AppLayout({config}) {
     const httpClient = useHttpClient();
     const navigate = useNavigate();
     const location = useLocation();
@@ -33,7 +33,7 @@ function AppLayout() {
         })
     }
 
-    return <div>
+    return <div style={{height: '100%'}}>
         <AppBar component="nav" position="fixed"
             sx={{
                 width: '100%',
@@ -49,16 +49,21 @@ function AppLayout() {
                     component="div"
                     sx={{ flexGrow: 1 }}
                 >
-                    Jack's Weather App
+                    Jack Tabb
                 </Typography>
-                <Box>
-                    <Button onClick={handleLogout} sx={{ color: '#fff' }}>
+                <Box className={styles.menuLinks}>
+                    <Link to='/home' className={styles.menuLink}>Home</Link>
+                    <Link to='/home#projects' className={styles.menuLink}>Projects</Link>
+                    {/*<Button sx={{ color: '#fff' }}>*/}
+                    {/*    Projects*/}
+                    {/*</Button>*/}
+                    {config.logout && <Button onClick={handleLogout} sx={{ color: '#fff' }}>
                         Logout
-                    </Button>
+                    </Button>}
                 </Box>
             </Toolbar>
         </AppBar>
-        <div className="content">
+        <div className="content" style={{marginTop: '80px', height: '100%'}}>
             <Outlet />
         </div>
 
@@ -66,13 +71,18 @@ function AppLayout() {
 }
 
 
+
 export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<WelcomePage />} />
-                <Route path="home" element={<AppLayout />} >
+                <Route path="/" element={<AppLayout config={{}}/>} >
+                    <Route path="home" element={<Home />} />
                     <Route index element={<Home />} />
+                    <Route path="apps" element={<City />} />
+                </Route>
+                <Route path="apps" element={<AppLayout config={{logout: true}}/>} >
+                    <Route path="cityinfo" element={<City />} />
                 </Route>
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
