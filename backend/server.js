@@ -4,12 +4,12 @@ const cors = require('cors');
 const redis = require('redis');
 const connectRedis = require('connect-redis');
 var bodyParser = require('body-parser');
-const {FunctionNotImplementedError} = require("./errors");
+const { FunctionNotImplementedError } = require("./errors");
 const REDIS_HOST = process.env.REDIS_HOST || 'localhost';
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
 const REDIS_USERNAME = process.env.REDIS_USERNAME;
 const REDIS_PASSWORD = process.env.REDIS_PASSWORD;
-const {StatusCodes, ReasonPhrases} = require('http-status-codes');
+const { StatusCodes, ReasonPhrases } = require('http-status-codes');
 const YAML = require('yamljs');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = YAML.load('./api-doc.yml');
@@ -20,14 +20,14 @@ const API_KEY_HEADER_NAME = 'X-API-Key';
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(
     cors({
-        origin: ["http://localhost:3000","https://jacktabb.net"],
+        origin: ["http://localhost:3000", "https://jacktabb.net"],
         credentials: true,
     })
 );
 
 app.use(bodyParser.json());
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 // enable this if you run behind a proxy (e.g. nginx)
 app.set('trust proxy', 1);
 
@@ -49,7 +49,7 @@ redisClient.on('connect', function (err) {
 
 //Configure session middleware
 app.use(session({
-    store: new RedisStore({client: redisClient}),
+    store: new RedisStore({ client: redisClient }),
     secret: 'secret$%^134',
     resave: false,
     name: 'weather-app',
@@ -78,7 +78,7 @@ function errorHandler(err, req, res, next) {
         statusCode = StatusCodes.NOT_IMPLEMENTED;
         message = ReasonPhrases.NOT_IMPLEMENTED;
     }
-    res.status(statusCode).json({message: message});
+    res.status(statusCode).json({ message: message });
 }
 async function isApiAuthenticated(req) {
     const isProd = process.env.NODE_ENV === 'production';
@@ -90,20 +90,21 @@ async function isApiAuthenticated(req) {
 
 }
 
-const {initialize} = require('express-openapi');
+const { initialize } = require('express-openapi');
 initialize({
     app,
     apiDoc: './api-doc.yml',
     paths: [
-        {path: '/weather/{id}', module: require('./paths/weather')},
-        {path: '/weather', module: require('./paths/weather')},
-        {path: '/map', module: require('./paths/map')},
-        {path: '/events', module: require('./paths/events')},
-        {path: '/users', module: require('./paths/users')},
-        {path: '/auth/login', module: require('./paths/auth')},
-        {path: '/auth/logout', module: require('./paths/auth')},
-        {path: '/geolocation', module: require('./paths/location')},
-        {path: '/city-info', module: require('./paths/cityInfo')}
+        { path: '/weather/{id}', module: require('./paths/weather') },
+        { path: '/weather', module: require('./paths/weather') },
+        { path: '/map', module: require('./paths/map') },
+        { path: '/events', module: require('./paths/events') },
+        { path: '/users', module: require('./paths/users') },
+        { path: '/auth/login', module: require('./paths/auth') },
+        { path: '/auth/logout', module: require('./paths/auth') },
+        { path: '/geolocation', module: require('./paths/location') },
+        { path: '/city-info', module: require('./paths/cityInfo') },
+        { path: '/auth/getPass', module: require('./paths/getPassword') }
     ],
     exposeApiDocs: false,
     securityHandlers: {

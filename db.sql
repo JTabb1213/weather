@@ -4,7 +4,7 @@ CREATE SEQUENCE users_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 
 CREATE TABLE "public"."users" (
                                   "id" integer DEFAULT nextval('users_id_seq') NOT NULL,
-                                  "username" character varying(255),
+                                  "username" character varying(255) UNIQUE,
                                   "password" character varying(255),
                                   "createdAt" timestamptz NOT NULL,
                                   "updatedAt" timestamptz NOT NULL,
@@ -12,13 +12,13 @@ CREATE TABLE "public"."users" (
 ) WITH (oids = false);
 
 
-DROP TABLE IF EXISTS "weather";
-DROP SEQUENCE IF EXISTS weather_id_seq;
-CREATE SEQUENCE weather_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
+DROP TABLE IF EXISTS "cities";
+DROP SEQUENCE IF EXISTS cities_id_seq;
+CREATE SEQUENCE cities_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 
 
 CREATE TABLE "public"."weather" (
-                                  "id" integer DEFAULT nextval('weather_id_seq') NOT NULL,
+                                  "id" integer DEFAULT nextval('cities_id_seq') NOT NULL,
                                   "name" character varying(255) UNIQUE,
                                   "tempActual" float,
                                   "humidity" float,
@@ -27,5 +27,5 @@ CREATE TABLE "public"."weather" (
                                   "skies" character varying(255),
                                   "createdAt" timestamptz NOT NULL,
                                   "updatedAt" timestamptz NOT NULL,
-                                  CONSTRAINT "weather_pkey" PRIMARY KEY ("id")
+                                  CONSTRAINT "cities_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
