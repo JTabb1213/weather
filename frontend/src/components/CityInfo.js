@@ -52,7 +52,7 @@ function CityInfo() {
         setCity(cityInput);
     };
     return (
-            <Grid container direction="column" alignItems="center" justifyContent="center" sx={{paddingBottom: '10px'}}>
+            <Grid container direction="column" alignItems="center" justifyContent="center" sx={{paddingBottom: '10px', paddingTop: '20px'}}>
                 <Grid item container align="center" spacing={1} justifyContent="center" xs={12}>
                     <Grid item>
                         <TextField
@@ -76,7 +76,7 @@ function CityInfo() {
                 </Grid>}
 
                 {cityInfo && <Grid container justifyContent="center" xs={12} sx={{marginTop: '30px'}}>
-                    <Grid item xs={12} container sx={{maxHeight: '425px'}}>
+                    <Grid item xs={12} container>
                         <Events events={cityInfo.events}/>
                     </Grid>
                     <Grid item container className={styles.weatherAndMap}

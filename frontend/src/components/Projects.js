@@ -30,11 +30,12 @@ function ProjectCard() {
 
 export default function Projects() {
     return <Grid container direction="column"
-          sx={{backgroundColor: '#ebeeee', height: '100%'}}>
-        <Grid container item direction="column" alignItems="center" justifyContent="center" sx={{marginTop: '40px'}}>
+          className={styles.section}
+          sx={{backgroundColor: '#ebeeee'}}>
+        <Grid container item direction="column" alignItems="center" justifyContent="center">
             <h5 className={styles.sectionTitle}>Projects</h5>
             <h1 className={styles.sectionIntro}>Check out my creations.</h1>
-            <Grid item container sx={{margin: '20px'}}>
+            <Grid item container justifyContent="center">
                 <ProjectCard/>
             </Grid>
         </Grid>

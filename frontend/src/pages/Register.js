@@ -36,17 +36,20 @@ export default function Register() {
     }
 
     return <div>
-        <Container sx={{ width: { xs: "90%", sm: '60%', md: '60%', lg: '50%', xl: '35%' }, marginTop: '200px' }}>
-            <Paper elevation={5} sx={{ padding: '40px' }}>
+        <Container sx={{
+            width: {xs: "90%", sm: '60%', md: '60%', lg: '50%', xl: '35%'},
+            marginTop: {xs: '20px', sm: '20px', md: '150px'}
+        }}>
+            <Paper elevation={5} sx={{padding: '40px'}}>
                 <Grid container
-                    alignItems="center"
-                    justifyContent="center"
-                    spacing={2}>
+                      alignItems="center"
+                      justifyContent="center"
+                      spacing={2}>
 
                     <Grid item align="center"
-                        xs={12}>
-                        <Box sx={{ m: 1, position: 'relative' }}>
-                            <img src="/register.png" />
+                          xs={12}>
+                        <Box sx={{m: 1, position: 'relative'}}>
+                            <img src="/register.png"/>
                             {working && (
                                 <CircularProgress
                                     size={50}
@@ -66,7 +69,7 @@ export default function Register() {
 
                     <Grid item xs={12} align="center">
                         <div className={styles.title}>New Account</div>
-                        <div className={styles.subtitle}>Get city and weather from Jacks's Weather App</div>
+                        <div className={styles.subtitle}>Create an account to access city information to get maps, weather, and upcoming events</div>
                     </Grid>
 
                     {error && <Grid item xs={12}>
@@ -74,14 +77,30 @@ export default function Register() {
                     </Grid>}
                     <Grid item xs={12}>
                         <TextField fullWidth defaultValue={username}
-                            onChange={ev => setUsername(ev.target.value)}
-                            label="Username" variant="outlined" />
+                                   InputProps={{sx: {fontSize: "1.6vh", height: {xs: "2.5rem"}}}}
+                                   InputLabelProps={{
+                                       sx: {
+                                           fontSize: {xs: "1.6vh"},
+                                           top: "-0.5vh",
+                                           "&.MuiInputLabel-shrink": {top: 0}
+                                       }
+                                   }}
+                                   onChange={ev => setUsername(ev.target.value)}
+                                   label="Username" variant="outlined"/>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField fullWidth defaultValue={password}
-                            type="password"
-                            onChange={ev => setPassword(ev.target.value)}
-                            label="Password" variant="outlined" />
+                                   InputProps={{sx: {fontSize: "1.6vh", height: {xs: "2.5rem"}}}}
+                                   InputLabelProps={{
+                                       sx: {
+                                           fontSize: {xs: "1.6vh"},
+                                           top: "-0.5vh",
+                                           "&.MuiInputLabel-shrink": {top: 0}
+                                       }
+                                   }}
+                                   type="password"
+                                   onChange={ev => setPassword(ev.target.value)}
+                                   label="Password" variant="outlined"/>
                     </Grid>
                     <Grid item xs={12}>
                         <Button fullWidth variant="contained" onClick={onSignUp}>SIGN UP</Button>

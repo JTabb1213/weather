@@ -6,11 +6,11 @@ import {Grid} from "@mui/material";
 
 
 export default function Home() {
-    return <Grid direction="column" container sx={{height: '100%', flexWrap: 'nowrap'}}>
-        <Grid item container xs={4}>
+    return <Grid direction="column" container sx={{flexWrap: 'nowrap', height: '100%'}}>
+        <Grid item container>
             <About/>
         </Grid>
-        <Grid item container xs={8}>
+        <Grid item container sx={{flexGrow: 1}}>
             <Projects/>
         </Grid>
     </Grid>
