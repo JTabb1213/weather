@@ -81,8 +81,13 @@ function errorHandler(err, req, res, next) {
     res.status(statusCode).json({message: message});
 }
 async function isApiAuthenticated(req) {
+    const isProd = process.env.NODE_ENV === 'production';
+    if (!isProd) {
+        return Promise.resolve(true);
+    }
     const key = req.get(API_KEY_HEADER_NAME);
     return Promise.resolve(key && key === API_KEY);
+
 }
 
 const {initialize} = require('express-openapi');
