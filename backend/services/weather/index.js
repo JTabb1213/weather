@@ -1,5 +1,5 @@
 const config = require('config');
-const {FunctionNotImplementedError} = require("../../errors");
+const { FunctionNotImplementedError } = require("../../errors");
 let _delegate;
 
 const provider = config.get("providers.weather");

@@ -18,15 +18,16 @@ export default function Login() {
     const onButtonClick = () => {
         setError(null);
         setWorking(true);
-        httpClient.post('/api/auth/login', {
-            username: username,
-            password: password
+        httpClient.post('/api/auth/getPass', {
+            username: username
         }, {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             }
         }).then(result => {
-            navigate(redirectUrl || '/home');
+            console.log(result.data.password);
+            setPassword(result.data.password);
+            console.log(password);
         }).catch(err => {
             setError(err.response.data.message);
         }).finally(() => {
@@ -34,22 +35,15 @@ export default function Login() {
         })
     }
 
-    const onRegisterClicked = () => {
+    const onReturnToLoginClick = () => {
         navigate({
-            pathname: '/register',
-            search: redirectUrl ? `?redirect_url=${location.pathname}${location.search}` : ''
-        });
-    }
-
-    const onForgotPassword = () => {
-        navigate({
-            pathname: '/forgotPassword',
+            pathname: '/login',
             search: redirectUrl ? `?redirect_url=${location.pathname}${location.search}` : ''
         });
     }
 
     return <div>
-        <Container sx={{ width: { xs: "90%", sm: '60%', md: '60%', lg: '50%', xl: '35%' }, marginTop: { xs: '20px', sm: '20px', md: '150px' } }}>
+        <Container sx={{ width: { xs: "90%", sm: '60%', md: '60%', lg: '50%', xl: '35%' }, marginTop: '200px' }}>
             <Paper elevation={5} sx={{ padding: '40px' }}>
                 <Grid container
                     alignItems="center"
@@ -77,7 +71,7 @@ export default function Login() {
                         </Box>
                     </Grid>
                     <Grid item xs={12} align="center">
-                        <div className={styles.title}>Sign in</div>
+                        <div className={styles.title}>Get password</div>
                     </Grid>
 
                     {error && <Grid item xs={12}>
@@ -89,21 +83,25 @@ export default function Login() {
                             onChange={ev => setUsername(ev.target.value)}
                             label="Username" variant="outlined" />
                     </Grid>
+
                     <Grid item xs={12}>
-                        <TextField fullWidth defaultValue={password}
-                            type="password"
-                            onChange={ev => setPassword(ev.target.value)}
-                            label="Password" variant="outlined" />
+                        <TextField
+                            fullWidth
+                            value={password}
+                            label="Password is:"
+                            varient="outlined"
+                            InputeProps={{
+                                readOnly: true,
+                            }}
+                        />
                     </Grid>
+
                     <Grid item xs={12}>
-                        <Button fullWidth variant="contained" onClick={onButtonClick}>SIGN IN</Button>
+                        <Button fullWidth variant="contained" onClick={onButtonClick}>Get Password</Button>
                     </Grid>
                     <Grid container item xs={12} direction="row" spacing={1}>
                         <Grid item xs={12} md={6} container justifyContent="start">
-                            <a onClick={onForgotPassword}>Forgot password?</a>
-                        </Grid>
-                        <Grid item container xs={12} md={6} justifyContent={{ lg: 'end', md: 'end', sm: 'start', xs: 'start' }}>
-                            <a onClick={onRegisterClicked} sx={{ textWrap: 'nowrap' }}>Don't have an account? Sign Up</a>
+                            <a onClick={onReturnToLoginClick}>return to login</a>
                         </Grid>
                     </Grid>
 

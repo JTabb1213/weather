@@ -5,6 +5,14 @@ class FunctionNotImplementedError extends Error {
     }
 }
 
+class UserAlreadyExists extends Error {
+    constructor(message) {
+        super(`username ${message} already taken`);
+        this.name = "UserAlreadyExists"
+    }
+}
+
 module.exports = {
-    FunctionNotImplementedError: FunctionNotImplementedError
+    FunctionNotImplementedError: FunctionNotImplementedError,
+    UserAlreadyExists: UserAlreadyExists
 }

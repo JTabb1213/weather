@@ -1,8 +1,8 @@
-import {useHttpClient} from "../HttpClient";
-import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
-import {useState} from "react";
-import {Alert, Box, Button, CircularProgress, Container, Grid, Paper, TextField} from "@mui/material";
-import {green} from "@mui/material/colors";
+import { useHttpClient } from "../HttpClient";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useState } from "react";
+import { Alert, Box, Button, CircularProgress, Container, Grid, Paper, TextField } from "@mui/material";
+import { green } from "@mui/material/colors";
 import styles from "../css/login.module.css";
 
 export default function Register() {
@@ -16,13 +16,18 @@ export default function Register() {
     const [working, setWorking] = useState();
     const redirectUrl = searchParams.get('redirect_url');
     const onSignUp = () => {
+        if (!username || !password) {
+            setError("Username and password are required");
+            return;
+        }
         httpClient.post('/api/users', {
             username: username,
             password: password
-        }, ).then(result => {
+        },).then(result => {
             navigate(redirectUrl || '/');
         }).catch(err => {
-            setError(err.message);
+            console.log(error);
+            setError(err.response?.data?.message || "an error occured");
         });
     }
 
@@ -31,17 +36,17 @@ export default function Register() {
     }
 
     return <div>
-        <Container sx={{width: { xs: "90%", sm: '60%', md: '60%', lg: '50%', xl: '35%' }, marginTop: {xs: '20px', sm: '20px', md: '150px'}}}>
-            <Paper elevation={5} sx={{padding: '40px'}}>
+        <Container sx={{ width: { xs: "90%", sm: '60%', md: '60%', lg: '50%', xl: '35%' }, marginTop: '200px' }}>
+            <Paper elevation={5} sx={{ padding: '40px' }}>
                 <Grid container
-                      alignItems="center"
-                      justifyContent="center"
-                      spacing={2}>
+                    alignItems="center"
+                    justifyContent="center"
+                    spacing={2}>
 
                     <Grid item align="center"
-                          xs={12}>
+                        xs={12}>
                         <Box sx={{ m: 1, position: 'relative' }}>
-                            <img src="/register.png"/>
+                            <img src="/register.png" />
                             {working && (
                                 <CircularProgress
                                     size={50}
@@ -61,7 +66,7 @@ export default function Register() {
 
                     <Grid item xs={12} align="center">
                         <div className={styles.title}>New Account</div>
-                        <div className={styles.subtitle}>Get city and weather from Jacks's Weather app</div>
+                        <div className={styles.subtitle}>Get city and weather from Jacks's Weather App</div>
                     </Grid>
 
                     {error && <Grid item xs={12}>
@@ -69,14 +74,14 @@ export default function Register() {
                     </Grid>}
                     <Grid item xs={12}>
                         <TextField fullWidth defaultValue={username}
-                                   onChange={ev => setUsername(ev.target.value)}
-                                   label="Username" variant="outlined" onChange={ev => setUsername(ev.target.value)}/>
+                            onChange={ev => setUsername(ev.target.value)}
+                            label="Username" variant="outlined" />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField fullWidth defaultValue={password}
-                                   type="password"
-                                   onChange={ev => setPassword(ev.target.value)}
-                                   label="Password" variant="outlined"/>
+                            type="password"
+                            onChange={ev => setPassword(ev.target.value)}
+                            label="Password" variant="outlined" />
                     </Grid>
                     <Grid item xs={12}>
                         <Button fullWidth variant="contained" onClick={onSignUp}>SIGN UP</Button>

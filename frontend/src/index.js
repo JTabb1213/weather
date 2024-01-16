@@ -7,12 +7,15 @@ import { BrowserRouter, Outlet, Route, Routes, useLocation, useNavigate, useSear
 import { AppBar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
 import { useHttpClient } from "./HttpClient";
 import Register from "./pages/Register";
+import WelcomePage from "./pages/WelcomePage";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function AppLayout() {
     const httpClient = useHttpClient();
     const navigate = useNavigate();
     const location = useLocation();
     const [searchParams, setSearchParams] = useSearchParams();
+    const redirectUrl = searchParams.get('redirect_url');
 
     const handleLogout = () => {
         httpClient.post('/api/auth/logout', {
@@ -21,8 +24,10 @@ function AppLayout() {
                 "Content-Type": "application/x-www-form-urlencoded"
             }
         }).then(result => {
-            //const originalUrl = searchParams.get('original_url') || '/';
-            navigate(location.href, { replace: true });
+            navigate({
+                pathname: '/',
+                search: redirectUrl ? `?redirect_url=${location.pathname}${location.search}` : ''
+            });
         }).catch(err => {
             console.error("logout failed", err)
         })
@@ -30,10 +35,10 @@ function AppLayout() {
 
     return <div>
         <AppBar component="nav" position="fixed"
-                sx={{
-                    width: '100%',
-                }}>
-            <Toolbar sx={{paddingLeft: {xs : '2px !important' , sm: '24px !important'}}}>
+            sx={{
+                width: '100%',
+            }}>
+            <Toolbar sx={{ paddingLeft: { xs: '2px !important', sm: '24px !important' } }}>
                 <IconButton
                     color="inherit"
                 >
@@ -65,11 +70,13 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<AppLayout />}>
+                <Route path="/" element={<WelcomePage />} />
+                <Route path="home" element={<AppLayout />} >
                     <Route index element={<Home />} />
                 </Route>
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
+                <Route path="forgotPassword" element={<ForgotPassword />} />
             </Routes>
         </BrowserRouter>
     );
