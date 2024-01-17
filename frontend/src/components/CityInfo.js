@@ -2,13 +2,14 @@ import {useEffect, useState} from 'react'
 import Weather from "./Weather";
 import Map from "./Map";
 import Events from "./Events";
-import {useSearchParams} from "react-router-dom";
+import {useLocation, useSearchParams} from "react-router-dom";
 import {Alert, AlertTitle, Button, Grid, TextField} from "@mui/material";
 import {useHttpClient} from "../HttpClient";
 import Progress from "./Progress";
 import styles from '../css/cityinfo.module.css';
 
 function CityInfo() {
+    const location = useLocation();
     const [searchParams, setSearchParams] = useSearchParams();
     const [city, setCity] = useState();
     const [cityInput, setCityInput] = useState();
@@ -42,6 +43,10 @@ function CityInfo() {
             getCityInfo();
         }
     }, [city]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location.pathname])
 
     const handleSearch = (e) => {
         e.preventDefault();
