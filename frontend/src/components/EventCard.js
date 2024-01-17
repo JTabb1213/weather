@@ -31,7 +31,7 @@ export default function EventCard({event}) {
                         </Grid>
                     </Grid>
                     <Grid container xs={12} sx={{paddingTop: '5px'}}>
-                        <div style={{textWrap: 'nowrap', textOverflow: 'ellipsis'}} className={styles.eventCardTitle}>{event.name}</div>
+                        <div style={{textOverflow: 'ellipsis', whiteSpace: 'nowrap', textWrap:'nowrap', overflow: 'hidden'}} className={styles.eventCardTitle}>{event.name}</div>
                     </Grid>
                 </Grid>
             </Grid>
