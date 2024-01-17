@@ -3,7 +3,8 @@
     "weather": "openweathermap",
     "location": "googleapi",
     "map": "googlemapapi",
-    "events" : "ticketmaster"
+    "events" : "ticketmaster",
+    "reviews" : "yelp"
   },
   "database": {
     "port": "5432",

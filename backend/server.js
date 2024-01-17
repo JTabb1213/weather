@@ -104,7 +104,8 @@ initialize({
         { path: '/auth/logout', module: require('./paths/auth') },
         { path: '/geolocation', module: require('./paths/location') },
         { path: '/city-info', module: require('./paths/cityInfo') },
-        { path: '/auth/getPass', module: require('./paths/getPassword') }
+        { path: '/auth/getPass', module: require('./paths/getPassword') },
+        { path: '/reviews', module: require('./paths/reviews') }
     ],
     exposeApiDocs: false,
     securityHandlers: {

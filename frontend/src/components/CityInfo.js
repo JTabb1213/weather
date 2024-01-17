@@ -7,6 +7,7 @@ import {Alert, AlertTitle, Button, Grid, TextField} from "@mui/material";
 import {useHttpClient} from "../HttpClient";
 import Progress from "./Progress";
 import styles from '../css/cityinfo.module.css';
+import Restaurants from "./Restaurants";
 
 function CityInfo() {
     const location = useLocation();
@@ -83,6 +84,9 @@ function CityInfo() {
                 {cityInfo && <Grid container justifyContent="center" xs={12} sx={{marginTop: '30px'}}>
                     <Grid item xs={12} container>
                         <Events events={cityInfo.events}/>
+                    </Grid>
+                    <Grid item xs={12} container>
+                        <Restaurants items={cityInfo.food}/>
                     </Grid>
                     <Grid item container className={styles.weatherAndMap}
                           direction="row" xs={11} lg={8} sx={{marginTop: '20px'}}>

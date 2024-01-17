@@ -1,0 +1,36 @@
+import Card from "@mui/material/Card";
+import styles from "../css/events.module.css";
+import CardContent from "@mui/material/CardContent";
+import {Grid, Rating} from "@mui/material";
+
+export default function ReviewCard({item}) {
+    return <Card raised={true} className={styles.eventCard} variant="outlined" sx={{margin: '10px', maxWidth: '400px', maxHeight: '300px'}}>
+        <CardContent sx={{padding: '0px'}} className={styles.eventCardContent}>
+            <Grid container sx={{padding: '0px'}} xs={12}>
+                <Grid item xs={12}>
+                    <img src={item.imageUrl} style={{width: '100%', height: '200px'}}/>
+                </Grid>
+                <Grid container xs={12} sx={{paddingTop: '15px', paddingLeft: '20px'}} spacing={1}>
+                    <Grid container xs={12} spacing={1}>
+                        <Grid item xs={8}>
+                            <div style={{textOverflow: 'ellipsis', textWrap:'nowrap', overflow: 'hidden'}}className={styles.eventCardGenre}>{item.categories.join(',')}</div>
+                        </Grid>
+                        <Grid item xs={4} justifyContent="end" container>
+                            <Grid item ><div className={styles.eventCardGenre}>{item.price}</div></Grid>
+                        </Grid>
+                    </Grid>
+
+                    <Grid container xs={12} sx={{paddingTop: '5px'}}>
+                        <Grid item xs={6} container alignItems="center" >
+                            <div style={{textWrap: 'nowrap', textOverflow: 'ellipsis'}} className={styles.eventCardTitle}>{item.name}</div>
+                        </Grid>
+                        <Grid item xs={6} container alignItems="center" justifyContent="end"><Rating
+                            name="simple-controlled" size="small"
+                            value={item.rating}
+                        /></Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </CardContent>
+    </Card>
+}

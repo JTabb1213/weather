@@ -1,14 +1,11 @@
 const config = require('config');
-let _delagate;
-const PROVIDERS = {
-    GOOGLEAPI: 'googleapi'
-}
+let _delegate;
 
 const provider = config.get("providers.location");
-_delagate = require('./providers/googleAPI');
+_delegate = require(`./providers/${provider}`);
 console.log(`Using ${provider} as the location provider`);
 async function getCoordinates(city) {
-    return _delagate.getCoordinates.apply(_delagate, arguments);
+    return _delegate.getCoordinates.apply(_delegate, arguments);
 }
 
 module.exports = {
