@@ -15,7 +15,7 @@ export default function EventCard({event}) {
         }).url
     }
 
-    return <Card raised={true} className={styles.eventCard} variant="outlined" sx={{margin: '10px', maxWidth: '350px'}}>
+    return <Card raised={true} className={styles.eventCard} variant="outlined" sx={{margin: '10px', width: {xs: '250px', sm: '300px'}}}>
         <CardContent sx={{padding: '0px'}} className={styles.eventCardContent}>
             <Grid container sx={{padding: '0px'}} xs={12}>
                 <Grid item xs={12} sx={{maxHeight: '80%'}}>

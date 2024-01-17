@@ -1,14 +1,16 @@
 import Card from "@mui/material/Card";
 import styles from "../css/events.module.css";
 import CardContent from "@mui/material/CardContent";
-import {Grid, Rating} from "@mui/material";
+import {Box, Grid, Rating} from "@mui/material";
+
+//sx={{height: '100%', minWidth: '300px'}}
 
 export default function ReviewCard({item}) {
-    return <Card raised={true} className={styles.eventCard} variant="outlined" sx={{margin: '10px', maxWidth: '400px', maxHeight: '300px'}}>
+    return <Card raised={true} className={styles.eventCard} variant="outlined" sx={{margin: '10px', width: {xs: '250px', sm: '300px'}, maxHeight: {sm: '300px', xs: '250px'}}}>
         <CardContent sx={{padding: '0px'}} className={styles.eventCardContent}>
             <Grid container sx={{padding: '0px'}} xs={12}>
                 <Grid item xs={12}>
-                    <img src={item.imageUrl} style={{width: '100%', height: '200px'}}/>
+                    <Box component="img" src={item.imageUrl} sx={{width: '100%', height: {sm: '200px', xs: '175px'}}}/>
                 </Grid>
                 <Grid container xs={12} sx={{paddingTop: '15px', paddingLeft: '20px'}} spacing={1}>
                     <Grid container xs={12} spacing={1}>

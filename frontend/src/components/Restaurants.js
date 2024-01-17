@@ -11,7 +11,7 @@ export default function Restaurants({items}) {
                 </Grid>
                 <Grid item container direction="row" sx={{overflow: 'scroll', flexWrap: 'nowrap'}} xs={12}>
                     {items.length > 0 ?
-                        items.map((item, i) => <Grid item sx={{height: '100%', minWidth: '300px'}}><ReviewCard key={i} item={item}/> </Grid>)
+                        items.map((item, i) => <Grid item><ReviewCard key={i} item={item}/> </Grid>)
                         : <h3 style={{paddingLeft: '40px'}}>There are no restaurants for this location</h3>}
                 </Grid>
             </Grid>
