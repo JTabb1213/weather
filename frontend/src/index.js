@@ -34,10 +34,10 @@ function AppLayout({config}) {
     }
 
     return <Box sx={{
-        paddingTop: {xs: '54px', sm: '54px', md: '64px'},
-        height: {xs: 'calc(100vh - 54px)', sm: 'calc(100vh - 54px)', md: 'calc(100vh - 64px)'}
+        // marginTop: {xs: '54px', sm: '54px', md: '64px'},
+        // height: {xs: 'calc(100vh - 54px)', sm: 'calc(100vh - 54px)', md: 'calc(100vh - 64px)'}
     }}>
-        <AppBar component="nav" position="fixed"
+        <AppBar component="nav" position="sticky"
                 sx={{
                     width: '100%',
                 }}>
