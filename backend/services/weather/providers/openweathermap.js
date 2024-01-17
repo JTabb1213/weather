@@ -1,7 +1,6 @@
 const axios = require("axios");
 const API_KEY = 'cc6af3ddc3889911b9d0f06a9ce2734a';
-
-
+const moment = require('moment');
 
 async function queryWeather(city, units) {
 
@@ -11,10 +10,11 @@ async function queryWeather(city, units) {
         name: data.name,
         tempActual: data.main.temp,
         humidity: data.main.humidity,
-        windSpeed: data.wind.speed,
+        windSpeed: Math.round(data.wind.speed),
         tempFeelsLike: data.main.feels_like,
         skies: data.weather[0].main,
-        pressure: data.main.pressure / 30
+        pressure: Math.round(data.main.pressure / 30),
+        localTime: moment().utcOffset(data.timezone / 60).utc(true).toISOString()
     }
 }
 

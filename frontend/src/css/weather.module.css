@@ -29,8 +29,13 @@
     color: #b6b6b6;
 }
 
-@media screen and (max-width: 600px) {
+.condition {
+    padding-top: 4px;
+    color: #b6b6b6;
+}
 
+
+@media screen and (max-width: 600px) {
     .unitNames {
         padding-top: 0px;
     }

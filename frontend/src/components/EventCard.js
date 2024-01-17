@@ -15,7 +15,7 @@ export default function EventCard({event}) {
         }).url
     }
 
-    return <Card raised={true} className={styles.eventCard} variant="outlined" sx={{margin: '10px'}}>
+    return <Card raised={true} className={styles.eventCard} variant="outlined" sx={{margin: '10px', maxWidth: '350px'}}>
         <CardContent sx={{padding: '0px'}} className={styles.eventCardContent}>
             <Grid container sx={{padding: '0px'}} xs={12}>
                 <Grid item xs={12} sx={{maxHeight: '80%'}}>
@@ -23,15 +23,15 @@ export default function EventCard({event}) {
                 </Grid>
                 <Grid container xs={12} sx={{paddingTop: '15px', paddingLeft: '20px'}} spacing={1}>
                     <Grid container xs={12} spacing={1}>
-                        <Grid item xs={4}>
+                        <Grid item xs={6}>
                             <div className={styles.eventCardGenre}>{event.classifications[0].genre.name}</div>
                         </Grid>
-                        <Grid item xs={8} justifyContent="end" container>
+                        <Grid item xs={6} justifyContent="end" container>
                             <Grid item ><div className={styles.eventCardGenre}>{event.date}</div></Grid>
                         </Grid>
                     </Grid>
                     <Grid container xs={12} sx={{paddingTop: '5px'}}>
-                        <div className={styles.eventCardTitle}>{event.name}</div>
+                        <div style={{textWrap: 'nowrap', textOverflow: 'ellipsis'}} className={styles.eventCardTitle}>{event.name}</div>
                     </Grid>
                 </Grid>
             </Grid>
