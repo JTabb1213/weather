@@ -13,27 +13,29 @@ export default function ReviewCard({item}) {
                     <Box component="img" src={item.imageUrl} sx={{width: '100%', height: {sm: '200px', xs: '175px'}}}/>
                 </Grid>
                 <Grid container xs={12} sx={{paddingTop: '15px', paddingLeft: '20px'}} spacing={1}>
-                    <Grid container xs={12} spacing={1}>
+                    <Grid container xs={12}>
                         <Grid item xs={8}>
-                            <div style={{textOverflow: 'ellipsis', whiteSpace: 'nowrap', textWrap:'nowrap', overflow: 'hidden'}} className={styles.eventCardGenre}>{item.categories.join(',')}</div>
+                            <div style={{textOverflow: 'ellipsis', whiteSpace: 'nowrap', textWrap:'nowrap', overflow: 'hidden'}} className={styles.eventCardGenre}>{item.categories[0]}</div>
                         </Grid>
                         <Grid item xs={4} justifyContent="end" container>
-                            <Grid item ><div className={styles.eventCardGenre}>{item.price}</div></Grid>
+                            <Rating
+                                precision={0.5} size="small"
+                                value={item.rating}
+                            />
                         </Grid>
                     </Grid>
 
                     <Grid container xs={12} sx={{paddingTop: '5px'}}>
-                        <Grid item xs={6} container alignItems="center" >
-                            <div>{item.reviewCount} Reviews</div>
+                        <Grid item xs={9} container alignItems="center" >
+                            <div className={styles.eventCardTitle}>{item.name}</div>
                         </Grid>
-                        <Grid item xs={6} container alignItems="center" justifyContent="end"><Rating
-                            precision={0.5} size="small"
-                            value={item.rating}
-                        /></Grid>
+                        <Grid item xs={3} container alignItems="center" justifyContent="end">
+                            <div style={{paddingRight: '2px'}}className={styles.eventCardGenre}>{item.price}</div>
+                        </Grid>
                     </Grid>
-                    <Grid container xs={12} sx={{paddingTop: '5px'}}>
-                        <div style={{textOverflow: 'ellipsis', whiteSpace: 'nowrap', textWrap:'nowrap', overflow: 'hidden'}}  className={styles.eventCardTitle}>{item.name}</div>
-                    </Grid>
+                    {/*<Grid container xs={12} sx={{paddingTop: '5px'}}>*/}
+                    {/*    */}
+                    {/*</Grid>*/}
                 </Grid>
             </Grid>
         </CardContent>
