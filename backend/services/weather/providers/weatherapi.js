@@ -1,6 +1,14 @@
 const API_KEY = '833ddf324d9242eda33142516231812';
 
 const axios = require("axios");
+const moment = require('moment');
+
+const SKIES_MAP = {
+    Sunny : 'Clear',
+    Overcast : 'Clouds',
+    'Moderate or heavy rain with thunder' : 'Thunderstorm',
+    'Light rain' : 'Rain'
+}
 
 async function queryWeather(city, units) {
     console.log(`Fetching weather from weatherapi`);
@@ -14,8 +22,9 @@ async function queryWeather(city, units) {
             humidity: current.humidity,
             tempFeelsLike: current.feelslike_f,
             windSpeed: current.wind_mph,
-            skies: current.condition.text,
-            pressure: current.condition.pressure_in
+            skies: SKIES_MAP[current.condition.text] || current.condition.text,
+            pressure: current.pressure_in,
+            localTime: moment(location.localtime, 'YYYY-MM-DD HH:mm').utc(true).toISOString(true)
         }
     });
 }

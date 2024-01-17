@@ -5,7 +5,7 @@ const moment = require('moment');
 
 
 function extractName(name) {
-    return name.split(/:|(vs)|(v\.)|(\s+v\s+)|-/)[0].trim();
+    return name.split(/:|(vs)|(v\.)|(\s+v\s+)|(\s+\|\s+)|-/)[0].trim();
 }
 async function queryEvents(city) {
     return axios.get(`https://app.ticketmaster.com/discovery/v2/events` , {

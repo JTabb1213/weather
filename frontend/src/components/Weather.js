@@ -4,8 +4,8 @@ import Card from "@mui/material/Card";
 
 function getWeatherIcon(weather) {
     const localDate = new Date(weather.localTime);
-    const hour = localDate.getHours();
-    const isDaytime = hour < 17;
+    const hour = localDate.getUTCHours();
+    const isDaytime = hour > 6 && hour < 17;
     const skies = weather.skies?.toLowerCase();
     let image = null;
     if (skies === 'clouds') {
@@ -20,7 +20,15 @@ function getWeatherIcon(weather) {
         image = 'smoke.png';
     }else if (skies === 'fog') {
         image = isDaytime ? 'fog-day.png' : 'fog-night.png';
-    } else {
+    } else if (skies === 'partly cloudy') {
+        image = isDaytime ? 'partly-cloudy-day.png' : 'partly-cloudy-night.png';
+    } else if (skies === 'light snow') {
+        image = 'light-snow.png';
+    } else if (skies === 'thunderstorm') {
+        image = isDaytime ? 'thunderstorm-day.png' : 'thunderstorm-night.png';
+    }else if (skies === 'rain') {
+        image = isDaytime ? 'rainy-day.png' : 'rainy-night.png';
+    }else {
         image = 'unknown-weather.png'
     }
     return `/${image}`;
