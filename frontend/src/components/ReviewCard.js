@@ -6,7 +6,7 @@ import {Box, Grid, Rating} from "@mui/material";
 //sx={{height: '100%', minWidth: '300px'}}
 
 export default function ReviewCard({item}) {
-    return <Card raised={true} className={styles.eventCard} variant="outlined" sx={{margin: '10px', width: {xs: '250px', sm: '300px'}, maxHeight: {sm: '300px', xs: '250px'}}}>
+    return <Card raised={true} className={styles.eventCard} variant="outlined" sx={{margin: '10px', width: {xs: '250px', sm: '300px'}, maxHeight: {sm: '300px', xs: '275px'}}}>
         <CardContent sx={{padding: '0px'}} className={styles.eventCardContent}>
             <Grid container sx={{padding: '0px'}} xs={12}>
                 <Grid item xs={12}>
@@ -24,12 +24,15 @@ export default function ReviewCard({item}) {
 
                     <Grid container xs={12} sx={{paddingTop: '5px'}}>
                         <Grid item xs={6} container alignItems="center" >
-                            <div style={{textWrap: 'nowrap', textOverflow: 'ellipsis'}} className={styles.eventCardTitle}>{item.name}</div>
+                            <div>{item.reviewCount} Reviews</div>
                         </Grid>
                         <Grid item xs={6} container alignItems="center" justifyContent="end"><Rating
                             precision={0.5} size="small"
                             value={item.rating}
                         /></Grid>
+                    </Grid>
+                    <Grid container xs={12} sx={{paddingTop: '5px'}}>
+                        <div style={{textOverflow: 'ellipsis', whiteSpace: 'nowrap', textWrap:'nowrap', overflow: 'hidden'}}  className={styles.eventCardTitle}>{item.name}</div>
                     </Grid>
                 </Grid>
             </Grid>
