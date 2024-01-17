@@ -14,7 +14,8 @@ async function queryWeather(city, units) {
             humidity: current.humidity,
             tempFeelsLike: current.feelslike_f,
             windSpeed: current.wind_mph,
-            skies: current.condition.text
+            skies: current.condition.text,
+            pressure: current.condition.pressure_in
         }
     });
 }

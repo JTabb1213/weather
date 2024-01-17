@@ -86,7 +86,7 @@ function CityInfo() {
                     </Grid>
                     <Grid item container className={styles.weatherAndMap}
                           direction="row" xs={11} lg={8} sx={{marginTop: '20px'}}>
-                        <Grid item container
+                        <Grid item container justifyContent="end"
                               sx={{padding: '0px !important'}} xs={12} sm={12} md={6}>
                             <Weather weather={cityInfo.weather}/>
                         </Grid>

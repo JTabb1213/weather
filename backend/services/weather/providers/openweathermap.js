@@ -13,7 +13,8 @@ async function queryWeather(city, units) {
         humidity: data.main.humidity,
         windSpeed: data.wind.speed,
         tempFeelsLike: data.main.feels_like,
-        skies: data.weather[0].description
+        skies: data.weather[0].main,
+        pressure: data.main.pressure / 30
     }
 }
 
