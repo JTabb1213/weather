@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -10,6 +10,7 @@ import {HashLink as Link} from 'react-router-hash-link';
 import ForgotPassword from "./pages/ForgotPassword";
 import City from "./pages/City";
 import styles from './css/app.module.css';
+import ReactGA from 'react-ga';
 
 function AppLayout({config}) {
     const httpClient = useHttpClient();
@@ -72,6 +73,14 @@ function AppLayout({config}) {
 
 
 export default function App() {
+    const gaTrackingId = process.env.REACT_APP_GA_TRACKING_ID;
+    if (gaTrackingId) {
+        ReactGA.initialize(gaTrackingId);
+    }
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname + window.location.search);
+    }, []);
+
     return (
         <BrowserRouter>
             <Routes>
