@@ -27,7 +27,7 @@ export default function ReviewCard({item}) {
                             <div style={{textWrap: 'nowrap', textOverflow: 'ellipsis'}} className={styles.eventCardTitle}>{item.name}</div>
                         </Grid>
                         <Grid item xs={6} container alignItems="center" justifyContent="end"><Rating
-                            name="simple-controlled" size="small"
+                            precision={0.5} size="small"
                             value={item.rating}
                         /></Grid>
                     </Grid>
