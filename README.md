@@ -35,7 +35,7 @@ This project was created to learn and apply industry standard software engineeri
 
 <a id="RestAPI"></a>
 
-## User authentication and shared caching:
+## User authentication and distributed cache:
 
 <details>
 	<summary>Click here to see more about user authentication and distributed cache</summary>
