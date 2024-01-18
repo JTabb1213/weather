@@ -105,7 +105,7 @@ function AppLayout({config}) {
             <List>
                 {allLinks && allLinks.map(link => {
                     return <ListItem key={link.path}>{link.handler ?
-                         <Button onClick={() => setMenuOpen(!menuOpen) && link.handler}
+                         <Button onClick={() => {setMenuOpen(!menuOpen); link.handler.apply()}}
                                  sx={{color: '#fff'}}>{link.label}</Button> :
                          <Link onClick={() => setMenuOpen(!menuOpen)} to={link.path}
                                className={styles.menuLink}>{link.label}</Link>}
