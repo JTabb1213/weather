@@ -22,7 +22,7 @@ function ProjectCard() {
             </Grid>
         </CardContent>
         <CardActions>
-            <Button size="small" onClick={() => { window.location.href = 'https://github.com/JTabb1213/weather' }}>Github</Button>
+            <Button size="small" onClick={() => { window.open('https://github.com/JTabb1213/weather') }}>Github</Button>
             <Button size="small" onClick={() => { navigate('/apps/cityinfo') }}>Go to app</Button>
         </CardActions>
     </Card>
