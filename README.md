@@ -4,7 +4,7 @@ This project was created to learn and apply industry standard software engineeri
 [Rest Apis, click to see more](#RestAPI)
 * My backend is built as a rest api. I did this to make clients such as the front end web pages easily retrieve, modify, or delete data from various resources.
 
-[User authentication and shared caching, click to see more](#UserA)
+[User authentication and distributed cache, click to see more](#UserA)
 * I have user authentication for this website, so if a user wants to gain access to the protected parts of this website, they must either create an account or give a valid username and password 
 
  [Databases, click to see more](#db)
@@ -38,16 +38,16 @@ This project was created to learn and apply industry standard software engineeri
 ## User authentication and shared caching:
 
 <details>
-	<summary>Click here to see more about user authentication and shared caching</summary>
+	<summary>Click here to see more about user authentication and distributed cache</summary>
 
-* In order to use the webpage to search for city information, users first must login with a valid username and password. The can also create a new account.
+* In order to use the webpage to search for city information, users first must login with a valid username and password. They can also create a new account.
 * When the user attempts to login, a request, with the username and password in the body, is sent to the database to confirm that the user is found, which if successful, will make a 30 minute session for the user. This allows the user to access the protected endpoints of the website.
 
 ![chart of logic in user authorization](./imagesForReadme/imagedb.png)
 
-* Additionally, I have added shared caching, which stores the user session in a redis store. Now, all user session infomation is in a shared cache. This is useful because now if I wish to scale up my web application to meet traffic demand, users will not have any authentication issues when switching between instances of my app, as that info will be in a shared cashe.
+* Additionally, I have added a distributed cache, which stores the user session in a redis store. Now, all user session infomation is in a distributed cache. This is useful because now if I wish to scale up my web application to meet traffic demand, users will not have any authentication issues when switching between instances of my app, as that info will be in a distributed cache.
 
-![shared cache](./imagesForReadme/imageSC.png)
+![distributed cache](./imagesForReadme/imageSC.png)
 
 </details>
 
