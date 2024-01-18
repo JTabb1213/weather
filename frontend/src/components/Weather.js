@@ -35,12 +35,12 @@ function getWeatherIcon(weather) {
 }
 
 function Condition({value, image, unit}) {
-    return <Grid item container alignItems="center" justifyContent={{md: 'end', sm: 'center', xs: 'center'}}
-                     sx={{paddingTop: '10px'}} xs={8}>
-        <Grid item md={2}>
+    return <Grid item container alignItems="center"
+                     sx={{paddingTop: '10px', flexWrap: 'nowrap'}} xs={8}>
+        <Grid item>
             <img style={{maxHeight: '1.5em', maxWidth: '1.5em'}} src={image}/>
         </Grid>
-        <Grid item container alignItems="end" justifyContent={{xs: 'center', sm: 'start'}} md={5} sm={5}>
+        <Grid item container alignItems="end" sx={{flexWrap: 'nowrap'}} >
             <div className={styles.conditionValues}>{value}</div>
             <div className={styles.unitNames}>{unit}</div>
         </Grid>
@@ -55,26 +55,23 @@ function Weather({weather}) {
                     <Grid item xs={1}>
                         <span className={styles.weatherTitle}>{weather.name} </span>
                     </Grid>
-                    <Grid item container xs={7}>
-                        <Grid item container direction="column" alignItems="center" justifyContent="center" xs={12} sm={4}
-                              md={12}>
+                    <Grid item container xs={6} justifyContent="center">
+                        <Grid item container direction="column" alignItems="center" justifyContent="center" xs={4} sm={4}
+                              md={4}>
                             <img className={styles.skiesImg} src={getWeatherIcon(weather)}/>
                             <div className={styles.condition}>{weather.skies}</div>
                         </Grid>
-                        <Grid item container md={12} sm={8} xs={12} justifyContent="center" alignItems="center">
-                            <Grid item container direction="column" alignItems="center" justifyContent="center" xs={12}
-                                  md={4} sm={5}>
+                        <Grid item container md={8} sm={8} xs={8} justifyContent="center" alignItems="center">
+                            <Grid item container direction="column" alignItems="center" justifyContent="center" xs={6}>
                                 <div className={styles.actualTemp}>{Math.round(weather.tempActual)}</div>
                                 <div className={styles.feelsLike}>Feels
                                     like: {Math.round(weather.tempFeelsLike)}</div>
                             </Grid>
-                            <Grid item container justifyContent="end" alignItems="end" sm={7} md={6} xs={12}>
-                                <Grid item container direction={{xs: 'row' , sm: 'column'}} sx={{flexWrap: {xs: 'nowrap'}}}>
-                                    <Condition value={weather.windSpeed} image="/wind.png" unit="mph"/>
-                                    <Condition value={weather.humidity} image="/humidity.png" unit="%"/>
-                                    {weather.pressure &&
-                                        <Condition value={weather.pressure} image="/pressure.png" unit="mb"/>}
-                                </Grid>
+                            <Grid item container alignItems="end" justifyContent={{sm: 'center', xs: 'center'}} xs={6}>
+                                <Condition value={weather.windSpeed} image="/wind.png" unit="mph"/>
+                                <Condition value={weather.humidity} image="/humidity.png" unit="%"/>
+                                {weather.pressure &&
+                                    <Condition value={weather.pressure} image="/pressure.png" unit="mb"/>}
                             </Grid>
                         </Grid>
 

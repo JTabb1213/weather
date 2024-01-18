@@ -84,3 +84,7 @@ h1 {
     margin-bottom: 12px;
     letter-spacing: -1px;
 }
+
+.drawer {
+    background-color: #1976d2 !important;
+}

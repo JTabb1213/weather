@@ -27,15 +27,12 @@ export default function ReviewCard({item}) {
 
                     <Grid container xs={12} sx={{paddingTop: '5px'}}>
                         <Grid item xs={9} container alignItems="center" >
-                            <div className={styles.eventCardTitle}>{item.name}</div>
+                            <div style={{textOverflow: 'ellipsis', whiteSpace: 'nowrap', textWrap:'nowrap', overflow: 'hidden'}}  className={styles.eventCardTitle}>{item.name}</div>
                         </Grid>
                         <Grid item xs={3} container alignItems="center" justifyContent="end">
                             <div style={{paddingRight: '2px'}}className={styles.eventCardGenre}>{item.price}</div>
                         </Grid>
                     </Grid>
-                    {/*<Grid container xs={12} sx={{paddingTop: '5px'}}>*/}
-                    {/*    */}
-                    {/*</Grid>*/}
                 </Grid>
             </Grid>
         </CardContent>
