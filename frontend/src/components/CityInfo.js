@@ -4,7 +4,7 @@ import Map from "./Map";
 import Events from "./Events";
 import {useLocation, useSearchParams} from "react-router-dom";
 import {Alert, AlertTitle, Button, Grid, TextField} from "@mui/material";
-import {useHttpClient} from "../HttpClient";
+import {getErrorMessage, useHttpClient} from "../HttpClient";
 import Progress from "./Progress";
 import styles from '../css/cityinfo.module.css';
 import Restaurants from "./Restaurants";
@@ -24,7 +24,7 @@ function CityInfo() {
         httpClient.get(`/api/city-info?city=${city}`).then(result => {
             setCityInfo(result.data);
         }).catch(err => {
-            setError(err.response.data);
+            setError(getErrorMessage(err));
         }).finally(() => {
             setLoading(false);
         })

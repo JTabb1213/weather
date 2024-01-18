@@ -9,8 +9,7 @@ html, body, body > div {
 
 body {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    background-color: rgba(243, 246, 249, 0.6);
-    -webkit-font-smoothing: antialiased;
+    background-color: rgba(243, 246, 249, 0.6) !important;
 }
 
 @media screen and (max-width: 600px) {
@@ -83,8 +82,4 @@ h1 {
     line-height: 42px;
     margin-bottom: 12px;
     letter-spacing: -1px;
-}
-
-.drawer {
-    background-color: #1976d2 !important;
 }

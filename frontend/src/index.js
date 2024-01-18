@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import {styled, useTheme} from '@mui/material/styles';
+import {createTheme, responsiveFontSizes, ThemeProvider, useTheme} from '@mui/material/styles';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import {BrowserRouter, Outlet, Route, Routes, useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import {
     AppBar,
     Box,
-    Button,
+    Button, CssBaseline,
     Divider,
     Hidden,
     IconButton, List, ListItem,
@@ -22,7 +22,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import City from "./pages/City";
 import styles from './css/app.module.css';
 import ReactGA from 'react-ga';
-//import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
+
 import MenuIcon from '@mui/icons-material/Menu';
 
 const links = [{
@@ -37,9 +37,11 @@ function AppLayout({config}) {
     const httpClient = useHttpClient();
     const navigate = useNavigate();
     const location = useLocation();
+    const theme = useTheme();
     const [searchParams, setSearchParams] = useSearchParams();
     const redirectUrl = searchParams.get('redirect_url');
     const [menuOpen, setMenuOpen] = useState();
+    const drawerWidth = 240;
     const handleLogout = () => {
         httpClient.post('/api/auth/logout', {}, {
             headers: {
@@ -61,63 +63,93 @@ function AppLayout({config}) {
     }] : []);
 
     const drawerStyles = {
-        '&, & .MuiDrawer-paper': {
+        '& .MuiDrawer-paper': {
             backgroundColor: '#1976d2',
             color: '#fff',
-            width: '65%'
+            width: `${drawerWidth}px`
         },
     };
 
-    return <Box sx={{height: {md: 'calc(100vh - 64px)', xs: 'calc(100vh - 54px)', sm: 'calc(100vh - 54px)'}}}>
-        <AppBar component="nav" position="sticky"
-                sx={{
-                    width: '100%',
-                }}>
-            <Toolbar sx={{paddingLeft: {xs: '2px !important', sm: '24px !important'}}}>
-                <Hidden smUp>
-                <IconButton
-                    onClick={() => {
-                        setMenuOpen(true)
-                    }}
-                    color="inherit">
-                    <MenuIcon/>
-                </IconButton>
-                </Hidden>
-                <Typography variant="h6" component="div" sx={{flexGrow: 1}}>Jack Tabb</Typography>
-                <Hidden smDown>
-                <Box className={styles.menuLinks}>
-                    {allLinks.map(link => {
-                        return link.handler ? <Button onClick={link.handler} sx={{color: '#fff'}}>{link.label}</Button>
-                            : <Link to={link.path}
-                                    className={styles.menuLink}>{link.label}</Link>
-                    })}
-                </Box>
-                </Hidden>
-            </Toolbar>
-        </AppBar>
-        <SwipeableDrawer
-            sx={drawerStyles}
-            anchor='left'
-            open={menuOpen}
-            onClose={() => setMenuOpen(!menuOpen)}
-        >
-            <Divider/>
-            <List>
-                {allLinks && allLinks.map(link => {
-                    return <ListItem key={link.path}>{link.handler ?
-                         <Button onClick={() => {setMenuOpen(!menuOpen); link.handler.apply()}}
-                                 sx={{color: '#fff'}}>{link.label}</Button> :
-                         <Link onClick={() => setMenuOpen(!menuOpen)} to={link.path}
-                               className={styles.menuLink}>{link.label}</Link>}
-                    </ListItem>
-                })}
-            </List>
-        </SwipeableDrawer>
-        <div className="content" style={{height: '100%'}}>
-            <Outlet/>
-        </div>
+    const mainStyles = {
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        ...(menuOpen && {
+            transition: theme.transitions.create('margin', {
+                easing: theme.transitions.easing.easeOut,
+                duration: theme.transitions.duration.enteringScreen,
+            }),
+            marginLeft: `${drawerWidth}px`,
+        }),
+        height: {md: 'calc(100vh - 64px)', xs: 'calc(100vh - 54px)', sm: 'calc(100vh - 54px)'}
+    }
 
-    </Box>
+    let siteTheme = createTheme({
+        palette: {
+            mode: "light",
+        },
+    });
+    siteTheme = responsiveFontSizes(siteTheme);
+
+
+    return <ThemeProvider theme={siteTheme}>
+        <CssBaseline>
+        <Box sx={mainStyles}>
+            <AppBar component="nav" position="sticky"
+                    sx={{
+                        width: '100%',
+                    }}>
+                <Toolbar sx={{paddingLeft: {xs: '2px !important', sm: '24px !important'}}}>
+                    <Hidden smUp>
+                        <IconButton
+                            onClick={() => {
+                                setMenuOpen(true)
+                            }}
+                            color="inherit">
+                            <MenuIcon/>
+                        </IconButton>
+                    </Hidden>
+                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>Jack Tabb</Typography>
+                    <Hidden smDown>
+                        <Box className={styles.menuLinks}>
+                            {allLinks.map(link => {
+                                return link.handler ?
+                                    <Button onClick={link.handler} sx={{color: '#fff'}}>{link.label}</Button>
+                                    : <Link to={link.path}
+                                            className={styles.menuLink}>{link.label}</Link>
+                            })}
+                        </Box>
+                    </Hidden>
+                </Toolbar>
+            </AppBar>
+            <SwipeableDrawer
+                sx={drawerStyles}
+                anchor='left'
+                open={menuOpen}
+                onClose={() => setMenuOpen(!menuOpen)}
+            >
+                <Divider/>
+                <List>
+                    {allLinks && allLinks.map(link => {
+                        return <ListItem key={link.path}>{link.handler ?
+                            <Button onClick={() => {
+                                setMenuOpen(!menuOpen);
+                                link.handler.apply()
+                            }}
+                                    sx={{color: '#fff'}}>{link.label}</Button> :
+                            <Link onClick={() => setMenuOpen(!menuOpen)} to={link.path}
+                                  className={styles.menuLink}>{link.label}</Link>}
+                        </ListItem>
+                    })}
+                </List>
+            </SwipeableDrawer>
+            <Box className="content" style={{height: '100%'}}>
+                <Outlet/>
+            </Box>
+        </Box>
+        </CssBaseline>
+    </ThemeProvider>
 }
 
 

@@ -20,7 +20,7 @@ export const useHttpClient = () => {
         },
         function (error) {
             const currentPathname = window.location.pathname;
-            if (error.response.status === 401 && currentPathname !== '/login') {
+            if (error.response?.status === 401 && currentPathname !== '/login') {
                 navigate({
                     pathname: '/login',
                     search: `redirect_url=${location.pathname}${location.search}`,
@@ -30,4 +30,18 @@ export const useHttpClient = () => {
         }
     )
     return axiosInstance;
+}
+
+export function getErrorMessage(err) {
+    let msg = err.response?.data?.message;
+    if (!msg) {
+        if (err.code === 'ERR_NETWORK') {
+            msg = 'The service could not be reached, check to see if it is available';
+        }else {
+            msg = 'Unknown server error';
+        }
+    }
+    return {
+        message: msg
+    };
 }
