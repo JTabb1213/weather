@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import {createTheme, responsiveFontSizes, ThemeProvider, useTheme} from '@mui/material/styles';
 import Home from "./pages/Home";
@@ -22,7 +22,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import City from "./pages/City";
 import styles from './css/app.module.css';
 import ReactGA from 'react-ga';
-
+import AppContext from './AppContext';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const links = [{
@@ -33,15 +33,31 @@ const links = [{
     path: '/home#projects'
 }]
 
+const APP_REGISTRY = {
+    'cityinfo' : {
+        title: 'City Info'
+    }
+}
+
 function AppLayout({config}) {
     const httpClient = useHttpClient();
     const navigate = useNavigate();
     const location = useLocation();
     const theme = useTheme();
+    const [user, setUser] = useState();
+    const [appTitle, setAppTitle] = useState();
+    const context = useContext(AppContext);
     const [searchParams, setSearchParams] = useSearchParams();
     const redirectUrl = searchParams.get('redirect_url');
     const [menuOpen, setMenuOpen] = useState();
     const drawerWidth = 240;
+
+    useEffect(() => {
+        const segments = location.pathname.split('/');
+        const appInfo = APP_REGISTRY[segments[segments.length - 1]];
+        setAppTitle(appInfo && appInfo.title);
+    }, [location.pathname])
+
     const handleLogout = () => {
         httpClient.post('/api/auth/logout', {}, {
             headers: {
@@ -93,63 +109,69 @@ function AppLayout({config}) {
     siteTheme = responsiveFontSizes(siteTheme);
 
 
-    return <ThemeProvider theme={siteTheme}>
-        <CssBaseline>
-        <Box sx={mainStyles}>
-            <AppBar component="nav" position="sticky"
-                    sx={{
-                        width: '100%',
-                    }}>
-                <Toolbar sx={{paddingLeft: {xs: '2px !important', sm: '24px !important'}}}>
-                    <Hidden smUp>
-                        <IconButton
-                            onClick={() => {
-                                setMenuOpen(true)
-                            }}
-                            color="inherit">
-                            <MenuIcon/>
-                        </IconButton>
-                    </Hidden>
-                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>Jack Tabb</Typography>
-                    <Hidden smDown>
-                        <Box className={styles.menuLinks}>
-                            {allLinks.map(link => {
-                                return link.handler ?
-                                    <Button onClick={link.handler} sx={{color: '#fff'}}>{link.label}</Button>
-                                    : <Link to={link.path}
-                                            className={styles.menuLink}>{link.label}</Link>
+    return <AppContext.Provider value={{setUser}}>
+        <ThemeProvider theme={siteTheme}>
+            <CssBaseline>
+                <Box sx={mainStyles}>
+                    <AppBar component="nav" position="sticky"
+                            sx={{
+                                width: '100%',
+                            }}>
+                        <Toolbar sx={{paddingLeft: {xs: '2px !important', sm: '24px !important'}}}>
+                            <Hidden smUp>
+                                <IconButton
+                                    onClick={() => {
+                                        setMenuOpen(true)
+                                    }}
+                                    color="inherit">
+                                    <MenuIcon/>
+                                </IconButton>
+                            </Hidden>
+                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>Jack Tabb</Typography>
+                            <Hidden smDown>
+                                <Box className={styles.menuLinks}>
+                                    {allLinks.map(link => {
+                                        return link.handler ?
+                                            <Button onClick={link.handler} sx={{color: '#fff'}}>{link.label}</Button>
+                                            : <Link to={link.path}
+                                                    className={styles.menuLink}>{link.label}</Link>
+                                    })}
+                                </Box>
+                            </Hidden>
+                        </Toolbar>
+                    </AppBar>
+                    {/*{appTitle &&*/}
+                    {/*    <Typography variant="h6" component="div" sx={{flexGrow: 1, padding: '10px 10px 10px 20px', backgroundColor: '#fff', fontWeight: '700'}}>{appTitle}</Typography>}*/}
+                    {/*{appTitle && <Divider orientation="horizontal" flexItem />}*/}
+                    <SwipeableDrawer
+                        sx={drawerStyles}
+                        anchor='left'
+                        open={menuOpen}
+                        onClose={() => setMenuOpen(!menuOpen)}
+                    >
+                        <Divider/>
+                        <List>
+                            {allLinks && allLinks.map(link => {
+                                return <ListItem key={link.path}>{link.handler ?
+                                    <Button onClick={() => {
+                                        setMenuOpen(!menuOpen);
+                                        link.handler.apply()
+                                    }}
+                                            sx={{color: '#fff'}}>{link.label}</Button> :
+                                    <Link onClick={() => setMenuOpen(!menuOpen)} to={link.path}
+                                          className={styles.menuLink}>{link.label}</Link>}
+                                </ListItem>
                             })}
-                        </Box>
-                    </Hidden>
-                </Toolbar>
-            </AppBar>
-            <SwipeableDrawer
-                sx={drawerStyles}
-                anchor='left'
-                open={menuOpen}
-                onClose={() => setMenuOpen(!menuOpen)}
-            >
-                <Divider/>
-                <List>
-                    {allLinks && allLinks.map(link => {
-                        return <ListItem key={link.path}>{link.handler ?
-                            <Button onClick={() => {
-                                setMenuOpen(!menuOpen);
-                                link.handler.apply()
-                            }}
-                                    sx={{color: '#fff'}}>{link.label}</Button> :
-                            <Link onClick={() => setMenuOpen(!menuOpen)} to={link.path}
-                                  className={styles.menuLink}>{link.label}</Link>}
-                        </ListItem>
-                    })}
-                </List>
-            </SwipeableDrawer>
-            <Box className="content" style={{height: '100%'}}>
-                <Outlet/>
-            </Box>
-        </Box>
-        </CssBaseline>
-    </ThemeProvider>
+                        </List>
+                    </SwipeableDrawer>
+                    <Box className="content" style={{height: '100%'}}>
+                        <Outlet/>
+                    </Box>
+                </Box>
+
+            </CssBaseline>
+        </ThemeProvider>
+    </AppContext.Provider>
 }
 
 

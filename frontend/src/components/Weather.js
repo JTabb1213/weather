@@ -18,7 +18,7 @@ function getWeatherIcon(weather) {
         image = 'snow.png';
     } else if (skies === 'smoke') {
         image = 'smoke.png';
-    } else if (skies === 'fog') {
+    } else if (skies === 'fog' || skies === 'haze') {
         image = isDaytime ? 'fog-day.png' : 'fog-night.png';
     } else if (skies === 'partly cloudy') {
         image = isDaytime ? 'partly-cloudy-day.png' : 'partly-cloudy-night.png';
