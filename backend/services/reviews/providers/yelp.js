@@ -1,5 +1,5 @@
 const axios  = require('axios');
-const API_KEY = "aelk7LJkkuN2Yu6M6TI0VojIhaxR9gyJQ40FkkAaAl9D3NrIxIuK46xL8-0Cf4AAM1iUrXS138C0U86IZ5h6Ji5nLRnBpGD2RKFVtcGKeX86tXo_GGRH3rFK9zeoZXYx";
+const API_KEY = process.env.YELP_API_KEY || "none"
 const _ = require('lodash');
 const moment = require('moment');
 async function queryReviews(city, term, limit) {
@@ -27,7 +27,7 @@ async function queryReviews(city, term, limit) {
                 reviewCount: item.review_count
             };
         });
-    })
+    });
 }
 
 module.exports = {

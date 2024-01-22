@@ -1,5 +1,5 @@
 const axios  = require('axios');
-const API_KEY = "1AN7L3M4BCM3AMiuIT2SMW4lS1XxnuW7";
+const API_KEY = process.env.TICKETMASTER_API_KEY || "none";
 const _ = require('lodash');
 const moment = require('moment');
 
@@ -35,7 +35,7 @@ async function queryEvents(city) {
                 date: moment(item.dates.start.localDate).format('ddd, MMM Do')
             }
         }) || []), 'name');
-    })
+    });
 }
 
 module.exports = {
