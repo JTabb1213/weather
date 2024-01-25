@@ -44,7 +44,7 @@ This project was created to learn and apply industry standard software engineeri
 
 * Additionally, I have added a distributed cache, which stores the user session in a redis store. Now, all user session infomation is in a distributed cache. This is useful because now if I wish to scale up my web application to meet traffic demand, users will not have any authentication issues when switching between instances of my app, as that info will be in a distributed cache.
 
-![distributed cache](imagesForReadme/imageSC.png){width=50%}
+<img scr="imagesForReadme/imageSC.png" width="50%">
 
 </details>
 
@@ -78,7 +78,7 @@ This project was created to learn and apply industry standard software engineeri
 
 * This application was made accessible by anyone on the internet by deploying it to google cloud. I also had to host the redis store, which was done with redislabs, and host the postgre database, which was done with elephantSQL.
 
-![Model of cloud deployment:](imagesForReadme/image1.png){width=50%}
+<img src="imagesForReadme/image1.png" width="50%">
 
 </details>
 
