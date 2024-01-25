@@ -12,7 +12,7 @@ CREATE TABLE "public"."users" (
 ) WITH (oids = false);
 
 
-DROP TABLE IF EXISTS "cities";
+DROP TABLE IF EXISTS "weather";
 DROP SEQUENCE IF EXISTS cities_id_seq;
 CREATE SEQUENCE cities_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 

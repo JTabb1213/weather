@@ -1,5 +1,5 @@
-const axios  = require('axios');
-const API_KEY = process.env.TICKETMASTER_API_KEY || "none";
+const axios = require('axios');
+const API_KEY = "Z7PIxWQmK7sWx5LfSOkYDcUpsh5TjjGE";
 const _ = require('lodash');
 const moment = require('moment');
 
@@ -8,7 +8,7 @@ function extractName(name) {
     return name.split(/:|(vs)|(v\.)|(\s+v\s+)|(\s+\|\s+)|-/)[0].trim();
 }
 async function queryEvents(city) {
-    return axios.get(`https://app.ticketmaster.com/discovery/v2/events` , {
+    return axios.get(`https://app.ticketmaster.com/discovery/v2/events`, {
         params: {
             city: city,
             apikey: API_KEY
@@ -20,12 +20,12 @@ async function queryEvents(city) {
             const momentB = moment(b.dates.start.localDate);
             if (momentA.isAfter(momentB)) {
                 return 1;
-            }else if (momentB.isAfter(momentA)) {
+            } else if (momentB.isAfter(momentA)) {
                 return -1
-            }else {
+            } else {
                 return 0;
             }
-        }).map(item=>{
+        }).map(item => {
             return {
                 name: extractName(item.name),
                 type: item.type,
