@@ -117,9 +117,6 @@ This had the advantage of using any service provider, and not having to change t
 high degree of availability.
 
 ## Responsive Web Design
-
----
-
 The UI was implemented using reactJS, and [MUI](https://mui.com/material-ui/guides/responsive-ui/) as the design system. The implementation of MUI on react has responsive layouts built in. 
 By using the breakpoints and changing the layout direction or col/row sizes based on those breakpoints as well as reducing font size, spacing, margins, etc..
 helped make the application look good on browsers, tablets, or mobile devices.
