@@ -98,6 +98,7 @@ __Deployment architecture diagram__
 ## Software design patterns
 
 ---
+
 I have been studying the famous [design patterns](https://en.wikipedia.org/wiki/Design_Patterns)
  book and wanted to try implementing some of them in the application. At first I started just writing code, but I soon started to see and identify some patterns
 that would make development easier, cleaner, and better organized. One pattern that emerged was the [delegate pattern](https://en.wikipedia.org/wiki/Delegation_pattern#:~:text=In%20software%20engineering%2C%20the%20delegation,but%20with%20the%20original%20context.)
@@ -118,6 +119,7 @@ high degree of availability.
 ## Responsive Web Design
 
 ---
+
 The UI was implemented using reactJS, and [MUI](https://mui.com/material-ui/guides/responsive-ui/) as the design system. The implementation of MUI on react has responsive layouts built in. 
 By using the breakpoints and changing the layout direction or col/row sizes based on those breakpoints as well as reducing font size, spacing, margins, etc..
 helped make the application look good on browsers, tablets, or mobile devices.
