@@ -15,8 +15,6 @@ The backend is a webservice written in nodeJS and expressJS that provides an API
 * [Responsive Web Design](#responsive-web-design). Understand and implement a design that looks good on any form factor
 
 ## Rest APIs
-
----
 REST APIs are the de facto standard for providing data to help power web applications as well as facilitating connectivity between systems.
 RESTful APIs are resource based, so I wanted to expose a few different resources such as weather, local events, and restaurants for a given city to my website.
 I followed best practices when creating the API, including syntax, proper usage of http verbs, and documentation. 
@@ -31,8 +29,6 @@ I followed best practices when creating the API, including syntax, proper usage 
 * The api document can be found [here](https://jtabb1213.github.io/weather/#/).
 
 ## Authentication and Session Management:
-
----
 I wanted to learn about general web application security. Since the web service were going to be deployed and accessible to the public I wanted make sure only
 authenticated users can access it. I first created security schemes on the API doc, then added the security to specific endpoints I wanted to protect (ex. login endpoint)
 . When integrating with the [express-openapi](https://www.npmjs.com/package/express-openapi) integration I configured the security handlers with the implementation of those security schemes. The two schemes I used were:
@@ -58,8 +54,6 @@ or the application restarts due to a failure. To help solve this problem I used 
 <img scr="imagesForReadme/imageSC.png" width="50%">
 
 ## Database
-
----
 A database was used to persist certain data. At first, I started out using the database as the user store for authentication purposes. 
 Then, to expand on my knowledge of rest apis, I wanted to perform crud operations for weather resources.
 
@@ -75,8 +69,6 @@ Sample weather rest api call from postman to work with the weather table:
 To update the user information, a very similar approach is taken only now instead of using postman to update the database, users will do it when creating their account or logging into the website.
 
 ## Cloud deployment
-
----
 To make the website and the web service accessible to the internet, and to get some hands-on experience with a major cloud provider, I chose to deploy it using google cloud platform.
 Since the cloud costs money to run the application I wanted to choose an easy, low-cost solution. I'm a poor college student! The technologies I went with were:
 
@@ -96,9 +88,6 @@ __Deployment architecture diagram__
 
 
 ## Software design patterns
-
----
-
 I have been studying the famous [design patterns](https://en.wikipedia.org/wiki/Design_Patterns)
  book and wanted to try implementing some of them in the application. At first I started just writing code, but I soon started to see and identify some patterns
 that would make development easier, cleaner, and better organized. One pattern that emerged was the [delegate pattern](https://en.wikipedia.org/wiki/Delegation_pattern#:~:text=In%20software%20engineering%2C%20the%20delegation,but%20with%20the%20original%20context.)
