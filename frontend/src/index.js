@@ -21,7 +21,7 @@ import {HashLink as Link} from 'react-router-hash-link';
 import ForgotPassword from "./pages/ForgotPassword";
 import City from "./pages/City";
 import styles from './css/app.module.css';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import AppContext from './AppContext';
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -174,14 +174,14 @@ function AppLayout({config}) {
     </AppContext.Provider>
 }
 
+const gaTrackingId = process.env.REACT_APP_GA_TRACKING_ID;
+if (gaTrackingId) {
+    ReactGA.initialize(gaTrackingId);
+}
 
 export default function App() {
-    const gaTrackingId = process.env.REACT_APP_GA_TRACKING_ID;
-    if (gaTrackingId) {
-        ReactGA.initialize(gaTrackingId);
-    }
     useEffect(() => {
-        ReactGA.pageview(window.location.pathname + window.location.search);
+        ReactGA.send({ hitType: 'pageview', page: window.location.pathname + window.location.search});
     }, []);
 
     return (
