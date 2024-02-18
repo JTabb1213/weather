@@ -1,9 +1,9 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import {createTheme, responsiveFontSizes, ThemeProvider, useTheme} from '@mui/material/styles';
+import { createTheme, responsiveFontSizes, ThemeProvider, useTheme } from '@mui/material/styles';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import {BrowserRouter, Outlet, Route, Routes, useLocation, useNavigate, useSearchParams} from "react-router-dom";
+import { BrowserRouter, Outlet, Route, Routes, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import {
     AppBar,
     Box,
@@ -15,9 +15,9 @@ import {
     Toolbar,
     Typography
 } from "@mui/material";
-import {useHttpClient} from "./HttpClient";
+import { useHttpClient } from "./HttpClient";
 import Register from "./pages/Register";
-import {HashLink as Link} from 'react-router-hash-link';
+import { HashLink as Link } from 'react-router-hash-link';
 import ForgotPassword from "./pages/ForgotPassword";
 import City from "./pages/City";
 import styles from './css/app.module.css';
@@ -34,12 +34,12 @@ const links = [{
 }]
 
 const APP_REGISTRY = {
-    'cityinfo' : {
+    'cityinfo': {
         title: 'City Info'
     }
 }
 
-function AppLayout({config}) {
+function AppLayout({ config }) {
     const httpClient = useHttpClient();
     const navigate = useNavigate();
     const location = useLocation();
@@ -98,7 +98,7 @@ function AppLayout({config}) {
             }),
             marginLeft: `${drawerWidth}px`,
         }),
-        height: {md: 'calc(100vh - 64px)', xs: 'calc(100vh - 54px)', sm: 'calc(100vh - 54px)'}
+        height: { md: 'calc(100vh - 64px)', xs: 'calc(100vh - 54px)', sm: 'calc(100vh - 54px)' }
     }
 
     let siteTheme = createTheme({
@@ -109,32 +109,32 @@ function AppLayout({config}) {
     siteTheme = responsiveFontSizes(siteTheme);
 
 
-    return <AppContext.Provider value={{setUser}}>
+    return <AppContext.Provider value={{ setUser }}>
         <ThemeProvider theme={siteTheme}>
             <CssBaseline>
                 <Box sx={mainStyles}>
                     <AppBar component="nav" position="sticky"
-                            sx={{
-                                width: '100%',
-                            }}>
-                        <Toolbar sx={{paddingLeft: {xs: '2px !important', sm: '24px !important'}}}>
+                        sx={{
+                            width: '100%',
+                        }}>
+                        <Toolbar sx={{ paddingLeft: { xs: '2px !important', sm: '24px !important' } }}>
                             <Hidden smUp>
                                 <IconButton
                                     onClick={() => {
                                         setMenuOpen(true)
                                     }}
                                     color="inherit">
-                                    <MenuIcon/>
+                                    <MenuIcon />
                                 </IconButton>
                             </Hidden>
-                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>Jack Tabb</Typography>
+                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>Jack Tabb</Typography>
                             <Hidden smDown>
                                 <Box className={styles.menuLinks}>
                                     {allLinks.map(link => {
                                         return link.handler ?
-                                            <Button onClick={link.handler} sx={{color: '#fff'}}>{link.label}</Button>
+                                            <Button onClick={link.handler} sx={{ color: '#fff' }}>{link.label}</Button>
                                             : <Link to={link.path}
-                                                    className={styles.menuLink}>{link.label}</Link>
+                                                className={styles.menuLink}>{link.label}</Link>
                                     })}
                                 </Box>
                             </Hidden>
@@ -149,7 +149,7 @@ function AppLayout({config}) {
                         open={menuOpen}
                         onClose={() => setMenuOpen(!menuOpen)}
                     >
-                        <Divider/>
+                        <Divider />
                         <List>
                             {allLinks && allLinks.map(link => {
                                 return <ListItem key={link.path}>{link.handler ?
@@ -157,15 +157,15 @@ function AppLayout({config}) {
                                         setMenuOpen(!menuOpen);
                                         link.handler.apply()
                                     }}
-                                            sx={{color: '#fff'}}>{link.label}</Button> :
+                                        sx={{ color: '#fff' }}>{link.label}</Button> :
                                     <Link onClick={() => setMenuOpen(!menuOpen)} to={link.path}
-                                          className={styles.menuLink}>{link.label}</Link>}
+                                        className={styles.menuLink}>{link.label}</Link>}
                                 </ListItem>
                             })}
                         </List>
                     </SwipeableDrawer>
-                    <Box className="content" style={{height: '100%'}}>
-                        <Outlet/>
+                    <Box className="content" style={{ height: '100%' }}>
+                        <Outlet />
                     </Box>
                 </Box>
 
@@ -181,23 +181,23 @@ if (gaTrackingId) {
 
 export default function App() {
     useEffect(() => {
-        ReactGA.send({ hitType: 'pageview', page: window.location.pathname + window.location.search});
+        ReactGA.send({ hitType: 'pageview', page: window.location.pathname + window.location.search });
     }, []);
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<AppLayout config={{}}/>}>
-                    <Route path="home" element={<Home/>}/>
-                    <Route index element={<Home/>}/>
-                    <Route path="apps" element={<City/>}/>
+                <Route path="/" element={<AppLayout config={{}} />}>
+                    <Route path="home" element={<Home />} />
+                    <Route index element={<Home />} />
+                    <Route path="apps" element={<City />} />
                 </Route>
-                <Route path="apps" element={<AppLayout config={{logout: true}}/>}>
-                    <Route path="cityinfo" element={<City/>}/>
+                <Route path="apps" element={<AppLayout config={{ logout: true }} />}>
+                    <Route path="cityinfo" element={<City />} />
                 </Route>
-                <Route path="login" element={<Login/>}/>
-                <Route path="register" element={<Register/>}/>
-                <Route path="forgotPassword" element={<ForgotPassword/>}/>
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+                <Route path="forgotPassword" element={<ForgotPassword />} />
             </Routes>
         </BrowserRouter>
     );
@@ -206,7 +206,7 @@ export default function App() {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <App/>
+        <App />
     </React.StrictMode>
 );
 
