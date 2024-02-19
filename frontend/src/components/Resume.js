@@ -13,8 +13,8 @@ export default function ResumeButton() {
     };
 
     return (
-        <button className={styles.resumeButton} onClick={openResume}>
+        <a href className={styles.resumeButton} style={{ textDecoration: 'none' }} onClick={openResume}>
             Resume
-        </button>
+        </a>
     );
 }
