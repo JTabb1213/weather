@@ -76,7 +76,10 @@ a.menuLink {
     text-align: center;
     padding-right: 100px;
     padding-left: 100px;
-    word-wrap: break-word;
+}
+
+.skillBox p {
+    overflow-wrap: break-word;
 }
 
 .sectionTitle {

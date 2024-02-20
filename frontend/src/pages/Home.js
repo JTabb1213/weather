@@ -9,14 +9,11 @@ import AboutSection from "../components/AboutSection";
 
 export default function Home() {
     return <Grid direction="column" container sx={{ flexWrap: 'nowrap', height: '100%' }}>
-        <Grid item container>
-            <About />
-        </Grid>
         <Grid item container sx={{ flexGrow: 1 }}>
             <Projects />
         </Grid>
         <Grid item container id="skillsSection" sx={{ marginTop: 20 }} >
-            <div style={{ marginBottom: 500 }}>
+            <div style={{ marginBottom: 50 }}>
                 <Skills />
             </div>
         </Grid>

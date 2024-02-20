@@ -14,7 +14,7 @@ export default function About() {
             <Grid item xs={12} sm={4}>
                 <AboutButton />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid className="res" item xs={12} sm={4}>
                 <ResumeButton />
             </Grid>
         </div>
