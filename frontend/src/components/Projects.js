@@ -1,8 +1,9 @@
 import styles from "../css/app.module.css";
-import {Box, Button, CardActions, CardMedia, Grid, Typography} from "@mui/material";
+import {Box, Button, CardActions, Grid, Typography} from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import {useNavigate} from "react-router-dom";
+
 function ProjectCard({title, desc, links, image}) {
     const navigate = useNavigate();
     const handleLinkClicked = (link) => {
@@ -12,7 +13,7 @@ function ProjectCard({title, desc, links, image}) {
             navigate(link.route)
         }
     }
-    return <Card elevation={10} sx={{width: {xs: '200px', sm: '250px'}}}>
+    return <Card elevation={10} sx={{width: {xs: '200px', sm: '250px'}, height: '260px'}}>
         <CardContent>
             <Grid container direction="column">
                 <Grid container justifyContent="center">
@@ -37,14 +38,16 @@ function ProjectCard({title, desc, links, image}) {
 }
 
 export default function Projects() {
-    return <Grid container direction="column"
-                 className={styles.section}
-                 sx={{backgroundColor: '#fff'}}>
-        <Grid container item direction="column" alignItems="center" justifyContent="center">
+    return <Grid container item direction="row" alignItems="center" justifyContent="center"
+                 sx={{backgroundColor: '#fff'}} className={styles.section}>
+        <Grid item>
             <h5 className={styles.sectionTitle}>Projects</h5>
             <h1 className={styles.sectionIntro}>Check out my creations.</h1>
-            <Grid item container sx={{padding: {md: '10px'}}} justifyContent="center">
-                <ProjectCard title="CityInfo"
+        </Grid>
+        <Grid item container justifyContent="center" alignItems="center" columnSpacing={5}>
+            <Grid item>
+                <ProjectCard sx={{paddingTop: '30px'}}
+                    title="CityInfo"
                              desc="Search for a city to get a map, current weather, and upcoming events"
                              links={[{
                                  label: 'Github',
@@ -55,8 +58,19 @@ export default function Projects() {
                                  app: 'CityInfo'
                              }]}
                              image="/cityinfo-app.png"/>
+            </Grid>
+            <Grid item>
+                <div className={`${styles.ribbon}`}><span>Coming Soon</span></div>
+                <ProjectCard
+                    title="RestaurantReviewer"
+                    desc="Allows a user to review a restaurant given using GPS location"
+                    image="/restaurant.png">
+
+                </ProjectCard>
 
             </Grid>
+
         </Grid>
+
     </Grid>
 }
