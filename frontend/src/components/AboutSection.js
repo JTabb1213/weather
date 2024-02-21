@@ -18,7 +18,7 @@ export default function AboutSection() {
                     <div className={aboutStyles.profileDescription} styles={{ wordBreak: 'break-all' }}>
                         I'm a computer science student at NIU in my junior year. When outside of school,
                         I like to learn new technologies and apply what I have learned by working on personal projects.
-                        This not only helps me ot only helps me grasp concepts better but also allows me to stay
+                        This not only helps me grasp concepts better but also allows me to stay
                         updated with the latest industry trends. In my free time, I like to explore the outdoors and
                         spend time with family and friends. I'm passionate about technology and
                         always eager to expand my skills and knowledge.
