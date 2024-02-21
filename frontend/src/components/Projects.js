@@ -63,7 +63,7 @@ export default function Projects() {
                 <div className={`${styles.ribbon}`}><span>Coming Soon</span></div>
                 <ProjectCard
                     title="RestaurantReviewer"
-                    desc="Allows a user to review a restaurant given using GPS location"
+                    desc="Allows a user to review a restaurant using a GPS location"
                     image="/restaurant.png">
                 </ProjectCard>
 
