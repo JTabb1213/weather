@@ -10,7 +10,7 @@ export default function Skills() {
                     <div className={styles.skillBox}>
                         <img src='Skills3.png' style={{ borderRadius: '10px' }} alt="Language Icon"></img>
                         <h3>Languages</h3>
-                        C++, JavaScript, HTML/CSS, Mainframe Assembler, python
+                        C++, JavaScript, Typescript, HTML/CSS, Mainframe Assembler, Python
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4} container justifyContent='center'>
@@ -24,7 +24,7 @@ export default function Skills() {
                     <div className={styles.skillBox}>
                         <img src='Skills2.png' style={{ borderRadius: '10px' }} alt="Tools Icon"></img>
                         <h3>Tools and technologies</h3>
-                        Git, Linux, Docker, Google Cloud Plaborm, Cloud Run, Redis, Postman,OAS3, Github actions
+                        Git, Linux, Docker, Google Cloud Platform, Cloud Run, Redis, Postman, OAS3, Github actions
                     </div>
                 </Grid>
             </Grid>
