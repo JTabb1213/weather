@@ -9,27 +9,15 @@ import AboutSection from "../components/AboutSection";
 
 export default function Home() {
     return <Grid direction="column" container sx={{ flexWrap: 'nowrap', height: '100%' }}>
-        <Grid item container sx={{ flexGrow: 1 }}>
+        <Grid item container id="aboutSection"
+        >
+            <AboutSection />
+        </Grid>
+        <Grid item container id="projects">
             <Projects />
         </Grid>
-        <Grid item container id="skillsSection" sx={{ marginTop: 20 }} >
-            <div style={{ marginBottom: 50 }}>
-                <Skills />
-            </div>
-        </Grid>
-        <Grid item container id="aboutSection"
-            sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: 20,
-                width: '100%',
-                height: '100%',
-                backgroundColor: '#f0f0f0'
-            }}
-        >
-            <div style={{ marginBottom: 5000 }}>
-                <AboutSection />
-            </div>
+        <Grid item container id="skillsSection" >
+            <Skills />
         </Grid>
     </Grid>
 }

@@ -60,7 +60,7 @@ a.menuLink {
 
 .section {
     height: 100%;
-    padding: 20px 0px;
+    padding: 40px 0px;
 }
 
 .skillsContainer {
@@ -89,6 +89,7 @@ a.menuLink {
     margin-bottom: 0.3rem;
     letter-spacing: .2rem;
     margin-top: 0px;
+    text-align: center;
 }
 
 .resumeButtonContainer {
@@ -116,6 +117,7 @@ a.menuLink {
     color: #313131;
     line-height: 1.25;
     margin-bottom: .7rem;
+    text-align: center;
 }
 
 h1 {

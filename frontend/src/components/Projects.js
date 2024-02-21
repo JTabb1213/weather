@@ -12,7 +12,7 @@ function ProjectCard({title, desc, links, image}) {
             navigate(link.route)
         }
     }
-    return <Card sx={{width: {xs: '200px', sm: '250px'}}}>
+    return <Card elevation={10} sx={{width: {xs: '200px', sm: '250px'}}}>
         <CardContent>
             <Grid container direction="column">
                 <Grid container justifyContent="center">
@@ -39,7 +39,7 @@ function ProjectCard({title, desc, links, image}) {
 export default function Projects() {
     return <Grid container direction="column"
                  className={styles.section}
-                 sx={{backgroundColor: '#ebeeee'}}>
+                 sx={{backgroundColor: '#fff'}}>
         <Grid container item direction="column" alignItems="center" justifyContent="center">
             <h5 className={styles.sectionTitle}>Projects</h5>
             <h1 className={styles.sectionIntro}>Check out my creations.</h1>
