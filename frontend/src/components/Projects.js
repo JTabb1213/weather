@@ -65,7 +65,6 @@ export default function Projects() {
                     title="RestaurantReviewer"
                     desc="Allows a user to review a restaurant given using GPS location"
                     image="/restaurant.png">
-
                 </ProjectCard>
 
             </Grid>
