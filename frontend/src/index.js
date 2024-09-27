@@ -58,19 +58,13 @@ function AppLayout({ config }) {
     const [menuOpen, setMenuOpen] = useState();
     const drawerWidth = 240;
     const displayLinks = (location.pathname === '/home' || location.pathname === '/') ? links : links.filter(link => link.label !== 'Skills' && link.label !== 'About' && link.label !== 'Projects');
+    const [isLoggedIn, setIsLoggedIn] = useState(null);
 
     useEffect(() => {
         const segments = location.pathname.split('/');
         const appInfo = APP_REGISTRY[segments[segments.length - 1]];
         setAppTitle(appInfo && appInfo.title);
     }, [location.pathname])
-
-    const handleLogin = () => {
-        navigate({
-            pathname: '/login',
-            search: redirectUrl ? `?redirect_url=${location.pathname}${location.search}` : ''
-        });
-    }
 
     const handleLogout = () => {
         httpClient.post('/api/auth/logout', {}, {

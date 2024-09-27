@@ -5,10 +5,10 @@ const redis = require('redis');
 const connectRedis = require('connect-redis');
 var bodyParser = require('body-parser');
 const { FunctionNotImplementedError } = require("./errors");
-const REDIS_HOST = process.env.REDIS_HOST || 'localhost';
-const REDIS_PORT = process.env.REDIS_PORT || 6379;
-const REDIS_USERNAME = process.env.REDIS_USERNAME;
-const REDIS_PASSWORD = process.env.REDIS_PASSWORD;
+const REDIS_HOST = process.env.REDIS_HOST || 'redis-16919.c241.us-east-1-4.ec2.redns.redis-cloud.com';
+const REDIS_PORT = process.env.REDIS_PORT || 16919;
+const REDIS_USERNAME = process.env.REDIS_USERNAME || 'default';
+const REDIS_PASSWORD = process.env.REDIS_PASSWORD || 'Kgh60yAyTBvX5Q8O6tYIKGbvkkxmqEb7';
 const { StatusCodes, ReasonPhrases } = require('http-status-codes');
 const YAML = require('yamljs');
 const swaggerUi = require('swagger-ui-express');
@@ -80,6 +80,7 @@ function errorHandler(err, req, res, next) {
     }
     res.status(statusCode).json({ message: message });
 }
+
 async function isApiAuthenticated(req) {
     const isProd = process.env.NODE_ENV === 'production';
     if (!isProd) {
