@@ -13,7 +13,7 @@ function ProjectCard({ title, desc, links, image }) {
             navigate(link.route)
         }
     }
-    return <Card elevation={10} sx={{ width: { xs: '200px', sm: '250px' }, height: '260px' }}>
+    return <Card elevation={10} sx={{ width: { xs: '200px', sm: '250px' }, height: '260px', }}>
         <CardContent>
             <Grid container direction="column">
                 <Grid container justifyContent="center">
@@ -22,12 +22,12 @@ function ProjectCard({ title, desc, links, image }) {
                 <Typography gutterBottom variant="h5" component="div">
                     {title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography sx={{ height: '50px' }} variant="body2" color="text.secondary">
                     {desc}
                 </Typography>
             </Grid>
         </CardContent>
-        <CardActions>
+        <CardActions sx={{ display: 'flex', justifyContent: "center", allignItems: 'center' }}>
             {links && links.filter(link => {
                 return link.url || link.route
             }).map(link => {
