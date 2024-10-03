@@ -3,15 +3,15 @@
     "weather": "openweathermap",
     "location": "googleapi",
     "map": "googlemapapi",
-    "events" : "ticketmaster",
-    "reviews" : "yelp"
+    "events": "ticketmaster",
+    "reviews": "yelp"
   },
   "database": {
     "port": "5432",
-    "host": "localhost",
-    "user": "admin",
-    "password": "password",
-    "db": "weather",
+    "host": "ldpg-crth9d3tq21c73aojapg-a.ohio-postgres.render.com",
+    "user": "databaseforweatherwebsite_user",
+    "password": "a02fUuDkcM3OLItU4Rk8jlkydnqZYtDG",
+    "db": "databaseforweatherwebsite",
     "dialect": "postgres",
     "pool": {
       "max": 5,

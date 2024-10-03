@@ -1,5 +1,5 @@
 const axios = require('axios');
-const apiKey = "AIzaSyAZrPFhU9UF2hscjsKyyuLCNIn43l1sDpU";
+const apiKey = "AIzaSyAXdHdQzOHXknbF2azGqn9ko5cDn4PjA9s";
 
 async function getCoordinates(city) {
     return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=${apiKey}`).then(result => {
