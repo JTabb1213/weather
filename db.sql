@@ -1,17 +1,16 @@
-DROP TABLE IF EXISTS "users";
+DROP TABLE IF EXISTS "usersWeather";
 DROP SEQUENCE IF EXISTS users_id_seq;
 CREATE SEQUENCE users_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 
-CREATE TABLE "public"."users" (
-                                  "id" integer DEFAULT nextval('users_id_seq') NOT NULL,
-                                  "username" character varying(255) UNIQUE,
-                                  "password" character varying(255),
-                                  "createdAt" timestamptz NOT NULL,
-                                  "updatedAt" timestamptz NOT NULL,
-                                  CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+CREATE TABLE "public"."usersWeather" (
+    "id" integer DEFAULT nextval('users_id_seq') NOT NULL,
+    "username" character varying(255) UNIQUE,
+    "password" character varying(255),
+    "createdAt" timestamptz NOT NULL,
+    "updatedAt" timestamptz NOT NULL,
+    CONSTRAINT "usersWeather_pkey" PRIMARY KEY ("id")  -- unique name
 ) WITH (oids = false);
-
-
+/*
 DROP TABLE IF EXISTS "weather";
 DROP SEQUENCE IF EXISTS cities_id_seq;
 CREATE SEQUENCE cities_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
@@ -29,3 +28,4 @@ CREATE TABLE "public"."weather" (
                                   "updatedAt" timestamptz NOT NULL,
                                   CONSTRAINT "cities_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
+*/
