@@ -1,5 +1,5 @@
 const axios = require('axios');
-const apiKey = "AIzaSyAXdHdQzOHXknbF2azGqn9ko5cDn4PjA9s";
+const apiKey = "AIzaSyB9_CPPqRsSpVZGYiEm-8iOskyYfp50O1E";
 const location = require('../../location');
 
 async function getMapUrl(city) {
