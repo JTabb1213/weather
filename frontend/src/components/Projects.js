@@ -66,7 +66,7 @@ export default function Projects() {
                     desc="Allows a user to review a restaurant using a GPS location"
                     links={[{
                         label: 'Go to app',
-                        url: 'https://lucky-apparatus-433800-r0.uc.r.appspot.com/'
+                        url: 'https://my-deploy-12345.uc.r.appspot.com'
                     }]}
                     image="/restaurant.png">
                 </ProjectCard>

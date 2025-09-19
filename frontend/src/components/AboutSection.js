@@ -13,9 +13,8 @@ export default function AboutSection() {
                     <Box component="img" className={aboutStyles.headshot} src="/headshot.png" />
                 </Grid>
                 <Grid item container xs={12} md={6} sm={12} justifyContent="center" sx={{ margin: '0px 30px' }}>
-                    <Box component="div" className={aboutStyles.profileDescription} sx={{ textAlign: { sm: "center", xs: "center", md: "left" } }}>I am currently a student
-                        at NIU pursuing a degree in computer science. I enjoy learning new technologies, frameworks, and
-                        languages in addition to the school coursework. I have career interests in software development and architecture as well as cybersecurity.</Box>
+                    <Box component="div" className={aboutStyles.profileDescription} sx={{ textAlign: { sm: "center", xs: "center", md: "left" } }}>I am a recent graduate in Computer Science from NIU. I enjoy learning new technologies, frameworks, and
+                        languages. My career interests include software development, software architecture, and cybersecurity.</Box>
                 </Grid>
             </Grid>
 
