@@ -12,6 +12,9 @@ module.exports = (sequelize, Sequelize) => {
         updatedAt: {
             type: Sequelize.DATE
         }
+    }, {
+        tableName: 'usersWeather',
+        freezeTableName: true
     });
 
     return User;
