@@ -11,6 +11,7 @@ function createUser(req, res, next) {
         if (error instanceof UserAlreadyExists) {
             res.status(StatusCodes.CONFLICT).json({ message: 'Username already taken' });
         } else {
+            error.message = `This is the error: ${error.message}`;
             next(error);
         }
     });
