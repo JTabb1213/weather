@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
@@ -5,10 +6,11 @@ const redis = require('redis');
 const connectRedis = require('connect-redis');
 var bodyParser = require('body-parser');
 const { FunctionNotImplementedError } = require("./errors");
-const REDIS_HOST = process.env.REDIS_HOST || 'redis-16919.c241.us-east-1-4.ec2.redns.redis-cloud.com';
-const REDIS_PORT = process.env.REDIS_PORT || 16919;
+const REDIS_HOST = process.env.REDIS_HOST;
+const REDIS_PORT = process.env.REDIS_PORT;
 const REDIS_USERNAME = process.env.REDIS_USERNAME || 'default';
-const REDIS_PASSWORD = process.env.REDIS_PASSWORD || 'Kgh60yAyTBvX5Q8O6tYIKGbvkkxmqEb7';
+const REDIS_PASSWORD = process.env.REDIS_PASSWORD;
+const PORT = process.env.PORT || 4000;
 const { StatusCodes, ReasonPhrases } = require('http-status-codes');
 const YAML = require('yamljs');
 const swaggerUi = require('swagger-ui-express');
@@ -17,10 +19,13 @@ const app = express();
 // This is a hard coded api key that is used for authentication to the set of REST APIs
 const API_KEY = 'b0ea62c7-1388-4411-aefe-1cfd554aa17f';
 const API_KEY_HEADER_NAME = 'X-API-Key';
+const corsOrigins = process.env.CORS_ORIGINS
+    ? process.env.CORS_ORIGINS.split(',')
+    : ['http://localhost:3000'];
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(
     cors({
-        origin: ["http://localhost:3000", "https://jacktabb.net"],
+        origin: corsOrigins,
         credentials: true,
     })
 );
@@ -33,8 +38,9 @@ app.set('trust proxy', 1);
 
 let redisUrl = process.env.REDIS_URL;
 if (!redisUrl) {
-    redisUrl = `redis://${REDIS_USERNAME ? REDIS_USERNAME + ':' : ''}${REDIS_PASSWORD ? REDIS_PASSWORD + '@' : ''}${REDIS_HOST}:${REDIS_PORT}`
+    redisUrl = `rediss://${REDIS_USERNAME ? REDIS_USERNAME + ':' : ''}${REDIS_PASSWORD ? REDIS_PASSWORD + '@' : ''}${REDIS_HOST}:${REDIS_PORT}`
 }
+
 const RedisStore = connectRedis(session);
 const redisClient = redis.createClient({
     url: redisUrl
@@ -47,18 +53,19 @@ redisClient.on('connect', function (err) {
     console.log('Connected to redis successfully');
 });
 
+const isProd = process.env.NODE_ENV !== 'development';
+
 //Configure session middleware
 app.use(session({
-    store: new RedisStore({ client: redisClient }),
-    secret: 'secret$%^134',
+    store: new RedisStore({ client: redisClient, prefix: 'weatherApp:sess:' }),
+    secret: process.env.SESSION_SECRET,
     resave: false,
-    name: 'weather-app',
     saveUninitialized: false,
     cookie: {
-        sameSite: process.env.NODE_ENV === 'production' && "none",
-        secure: process.env.NODE_ENV === 'production',
+        sameSite: isProd ? 'None' : 'Lax', // 'None' required for cross-site in prod; 'Lax' works over http in dev
+        secure: isProd,                     // secure: true required with sameSite:'None'; must be false on http localhost
         httpOnly: true,
-        maxAge: 1800000
+        maxAge: 10000 * 60 * 10
     }
 }));
 
@@ -72,6 +79,11 @@ function getMessageFromError(err) {
 }
 
 function errorHandler(err, req, res, next) {
+    const origin = req.headers.origin;
+    if (origin && corsOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+    }
     let statusCode = err.status ? err.status : StatusCodes.INTERNAL_SERVER_ERROR;
     let message = getMessageFromError(err);
     if (err instanceof FunctionNotImplementedError) {
@@ -82,7 +94,6 @@ function errorHandler(err, req, res, next) {
 }
 
 async function isApiAuthenticated(req) {
-    const isProd = process.env.NODE_ENV === 'production';
     if (!isProd) {
         return Promise.resolve(true);
     }
@@ -118,4 +129,4 @@ initialize({
     errorMiddleware: errorHandler
 });
 
-app.listen(4000);
+app.listen(PORT);

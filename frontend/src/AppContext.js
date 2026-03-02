@@ -1,8 +1,4 @@
-import {createContext} from "react";
-
-const Context = {
-
-}
+import { createContext } from "react";
 
 const AppContext = createContext();
 

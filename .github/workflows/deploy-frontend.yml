@@ -1,0 +1,46 @@
+name: Deploy Frontend to Firebase Hosting
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/deploy-frontend.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: frontend
+
+      # REACT_APP_BACKEND_API_BASE_URL must be set at build time so CRA
+      # can inline it; store your Cloud Run URL as a GitHub secret.
+      - name: Build
+        run: npm run build
+        working-directory: frontend
+        env:
+          REACT_APP_BACKEND_API_BASE_URL: ${{ secrets.REACT_APP_BACKEND_API_BASE_URL }}
+
+      # Requires firebase.json in ./frontend — run `firebase init hosting`
+      # inside the frontend/ folder once to generate it, then commit it.
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          channelId: live
+          projectId: ${{ secrets.GCP_PROJECT_ID }}
+          entryPoint: ./frontend

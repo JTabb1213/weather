@@ -1,9 +1,9 @@
-import {Alert, Box, Button, CircularProgress, Container, Grid, Paper, TextField} from "@mui/material";
-import {useState} from "react";
+import { Alert, Box, Button, CircularProgress, Container, Grid, Paper, TextField } from "@mui/material";
+import { useState } from "react";
 import styles from '../css/login.module.css';
-import {useHttpClient} from "../HttpClient";
-import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
-import {green} from '@mui/material/colors';
+import { useHttpClient } from "../HttpClient";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { green } from '@mui/material/colors';
 
 export default function Login() {
     const httpClient = useHttpClient();
@@ -53,7 +53,7 @@ export default function Login() {
                     <Grid item align="center"
                         xs={12}>
                         <Box sx={{ m: 1, position: 'relative' }}>
-                            <img src="/lock.png" />
+                            <img src="/lock.png" alt="Lock" />
                             {working && (
                                 <CircularProgress
                                     size={50}
@@ -101,7 +101,7 @@ export default function Login() {
                     </Grid>
                     <Grid container item xs={12} direction="row" spacing={1}>
                         <Grid item xs={12} md={6} container justifyContent="start">
-                            <a onClick={onReturnToLoginClick}>return to login</a>
+                            <button onClick={onReturnToLoginClick} className={styles.linkButton}>return to login</button>
                         </Grid>
                     </Grid>
 

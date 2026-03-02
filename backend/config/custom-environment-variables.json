@@ -1,15 +1,17 @@
 {
   "providers": {
     "weather": "WEATHER_PROVIDER",
+    "location": "LOCATION_PROVIDER",
     "map": "MAP_PROVIDER",
-    "events" : "EVENT_PROVIDER"
+    "events": "EVENT_PROVIDER",
+    "reviews": "REVIEWS_PROVIDER"
   },
   "database": {
     "port": "DB_PORT",
     "host": "DB_HOST",
     "user": "DB_USER",
     "password": "DB_PASSWORD",
-    "db": "DB_INSTANCE",
-    "dialect" : "DB_DIALECT"
+    "db": "DB_NAME",
+    "dialect": "DB_DIALECT"
   }
 }

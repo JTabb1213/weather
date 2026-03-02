@@ -31,3 +31,14 @@
     line-height: 1.334;
     letter-spacing: 0em;
 }
+
+.linkButton {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: rgb(25, 118, 210);
+    font-size: 0.875rem;
+    text-decoration: underline rgba(25, 118, 210, 0.4);
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}

@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createTheme, responsiveFontSizes, ThemeProvider, useTheme } from '@mui/material/styles';
-import Home from "./pages/Home";
 import Login from "./pages/Login";
-import { BrowserRouter, Outlet, Route, Routes, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { BrowserRouter, Link, Outlet, Route, Routes, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import {
     AppBar,
     Box,
@@ -17,54 +16,27 @@ import {
 } from "@mui/material";
 import { useHttpClient } from "./HttpClient";
 import Register from "./pages/Register";
-import { HashLink as Link } from 'react-router-hash-link';
 import ForgotPassword from "./pages/ForgotPassword";
 import City from "./pages/City";
 import styles from './css/app.module.css';
-import ReactGA from 'react-ga4';
+// import ReactGA from 'react-ga4';
 import AppContext from './AppContext';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const links = [{
-    label: 'Home',
-    path: '/home'
-}, {
-    label: 'Projects',
-    path: '/home#projects'
-}, {
-    label: 'Skills',
-    path: '/home#skillsSection'
-}, {
-    label: 'About',
-    path: '/home#aboutSection'
+    label: 'City Info',
+    path: '/'
 }]
-
-const APP_REGISTRY = {
-    'cityinfo': {
-        title: 'City Info'
-    }
-}
 
 function AppLayout({ config }) {
     const httpClient = useHttpClient();
     const navigate = useNavigate();
     const location = useLocation();
     const theme = useTheme();
-    const [user, setUser] = useState();
-    const [appTitle, setAppTitle] = useState();
-    const context = useContext(AppContext);
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const redirectUrl = searchParams.get('redirect_url');
-    const [menuOpen, setMenuOpen] = useState();
+    const [menuOpen, setMenuOpen] = useState(false);
     const drawerWidth = 240;
-    const displayLinks = (location.pathname === '/home' || location.pathname === '/') ? links : links.filter(link => link.label !== 'Skills' && link.label !== 'About' && link.label !== 'Projects');
-    const [isLoggedIn, setIsLoggedIn] = useState(null);
-
-    useEffect(() => {
-        const segments = location.pathname.split('/');
-        const appInfo = APP_REGISTRY[segments[segments.length - 1]];
-        setAppTitle(appInfo && appInfo.title);
-    }, [location.pathname])
 
     const handleLogout = () => {
         httpClient.post('/api/auth/logout', {}, {
@@ -81,7 +53,7 @@ function AppLayout({ config }) {
         })
     }
 
-    const allLinks = displayLinks.concat(config.logout ? [{
+    const allLinks = links.concat(config.logout ? [{
         label: 'Logout',
         handler: handleLogout
     }] : []);
@@ -117,7 +89,7 @@ function AppLayout({ config }) {
     siteTheme = responsiveFontSizes(siteTheme);
 
 
-    return <AppContext.Provider value={{ setUser }}>
+    return <AppContext.Provider value={{}}>
         <ThemeProvider theme={siteTheme}>
             <CssBaseline>
                 <Box sx={mainStyles}>
@@ -135,38 +107,36 @@ function AppLayout({ config }) {
                                     <MenuIcon />
                                 </IconButton>
                             </Hidden>
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>Jack Tabb</Typography>
+                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>City Info</Typography>
                             <Hidden smDown>
                                 <Box className={styles.menuLinks}>
                                     {allLinks.map(link => {
                                         return link.handler ?
-                                            <Button onClick={link.handler} sx={{ color: '#fff' }}>{link.label}</Button>
-                                            : <Link to={link.path}
+                                            <Button key={link.label} onClick={link.handler} sx={{ color: '#fff' }}>{link.label}</Button>
+                                            : <Link key={link.label} to={link.path}
                                                 className={styles.menuLink}>{link.label}</Link>
                                     })}
                                 </Box>
                             </Hidden>
                         </Toolbar>
                     </AppBar>
-                    {/*{appTitle &&*/}
-                    {/*    <Typography variant="h6" component="div" sx={{flexGrow: 1, padding: '10px 10px 10px 20px', backgroundColor: '#fff', fontWeight: '700'}}>{appTitle}</Typography>}*/}
-                    {/*{appTitle && <Divider orientation="horizontal" flexItem />}*/}
                     <SwipeableDrawer
                         sx={drawerStyles}
                         anchor='left'
                         open={menuOpen}
-                        onClose={() => setMenuOpen(!menuOpen)}
+                        onOpen={() => setMenuOpen(true)}
+                        onClose={() => setMenuOpen(false)}
                     >
                         <Divider />
                         <List>
                             {allLinks && allLinks.map(link => {
-                                return <ListItem key={link.path}>{link.handler ?
+                                return <ListItem key={link.label}>{link.handler ?
                                     <Button onClick={() => {
-                                        setMenuOpen(!menuOpen);
+                                        setMenuOpen(false);
                                         link.handler.apply()
                                     }}
                                         sx={{ color: '#fff' }}>{link.label}</Button> :
-                                    <Link onClick={() => setMenuOpen(!menuOpen)} to={link.path}
+                                    <Link onClick={() => setMenuOpen(false)} to={link.path}
                                         className={styles.menuLink}>{link.label}</Link>}
                                 </ListItem>
                             })}
@@ -182,25 +152,21 @@ function AppLayout({ config }) {
     </AppContext.Provider>
 }
 
-const gaTrackingId = process.env.REACT_APP_GA_TRACKING_ID;
-if (gaTrackingId) {
-    ReactGA.initialize(gaTrackingId);
-}
+// const gaTrackingId = process.env.REACT_APP_GA_TRACKING_ID;
+// if (gaTrackingId) {
+//     ReactGA.initialize(gaTrackingId);
+// }
 
 export default function App() {
-    useEffect(() => {
-        ReactGA.send({ hitType: 'pageview', page: window.location.pathname + window.location.search });
-    }, []);
+    // useEffect(() => {
+    //     ReactGA.send({ hitType: 'pageview', page: window.location.pathname + window.location.search });
+    // }, []);
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<AppLayout config={{}} />}>
-                    <Route path="home" element={<Home />} />
-                    <Route index element={<Home />} />
-                    <Route path="apps" element={<City />} />
-                </Route>
-                <Route path="apps" element={<AppLayout config={{ logout: true }} />}>
+                <Route path="/" element={<AppLayout config={{ logout: true }} />}>
+                    <Route index element={<City />} />
                     <Route path="cityinfo" element={<City />} />
                 </Route>
                 <Route path="login" element={<Login />} />
