@@ -1,5 +1,5 @@
 .mainContainer {
-    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     flex-direction: column;
     display: flex;
     align-items: center;
@@ -9,10 +9,11 @@
 
 .title {
     margin: 0px;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 1.5rem;
     line-height: 1.334;
     letter-spacing: 0em;
+    color: #2d3748;
 }
 
 @media screen and (max-width: 600px) {
@@ -26,10 +27,11 @@
 }
 
 .subtitle {
-    font-weight: 300;
+    font-weight: 400;
     font-size: 0.8rem;
     line-height: 1.334;
     letter-spacing: 0em;
+    color: #718096;
 }
 
 .linkButton {
@@ -37,8 +39,14 @@
     border: none;
     padding: 0;
     cursor: pointer;
-    color: rgb(25, 118, 210);
+    color: #1a365d;
     font-size: 0.875rem;
-    text-decoration: underline rgba(25, 118, 210, 0.4);
+    font-weight: 500;
+    text-decoration: underline rgba(26, 54, 93, 0.4);
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    transition: color 0.2s ease;
+}
+
+.linkButton:hover {
+    color: #2a5298;
 }

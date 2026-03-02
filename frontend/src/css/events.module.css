@@ -1,35 +1,44 @@
 .eventCardContent {
     font-size: 16px;
-    font-family: Averta, helvetica, arial, sans-serif;
-
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
 .eventCardContent:last-child {
     padding-bottom: 10px !important;
-
 }
 
 .eventCard {
-    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+    border-radius: 16px !important;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.eventCard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
 }
 
 .eventCardTitle {
-    font-weight: bold;
-    font-size: 18px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #2d3748;
 }
 
 .eventsSectionTitle {
-    font-weight: 900;
-    font-size: 20px;
-    letter-spacing: 0.3em;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     padding-left: 10px;
+    color: #1a365d;
 }
 
 
 .eventCardGenre {
-    color: rgb(100, 100, 100);
-    font-size: 14px;
+    color: #718096;
+    font-size: 13px;
+    font-weight: 500;
 }
 
 @media screen and (max-width: 600px) {

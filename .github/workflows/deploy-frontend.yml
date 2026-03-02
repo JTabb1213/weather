@@ -26,13 +26,9 @@ jobs:
         run: npm ci
         working-directory: frontend
 
-      # REACT_APP_BACKEND_API_BASE_URL must be set at build time so CRA
-      # can inline it; store your Cloud Run URL as a GitHub secret.
       - name: Build
         run: npm run build
         working-directory: frontend
-        env:
-          REACT_APP_BACKEND_API_BASE_URL: ${{ secrets.REACT_APP_BACKEND_API_BASE_URL }}
 
       # Requires firebase.json in ./frontend — run `firebase init hosting`
       # inside the frontend/ folder once to generate it, then commit it.

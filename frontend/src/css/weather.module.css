@@ -1,37 +1,42 @@
 .weatherTitle {
     font-size: 2.5em;
     font-weight: 700;
-    font-family: Averta, helvetica, arial, sans-serif;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    color: #2d3748;
 }
 
 .actualTemp {
     font-size: 4.6em;
-    font-weight: 100;
-    font-family: Averta, helvetica, arial, sans-serif;
+    font-weight: 300;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    color: #1a365d;
 }
+
 .feelsLike {
     font-size: 1em;
-    color: rgb(100, 100, 100);
-    font-weight: 100;
-    /*font-family: Averta, helvetica, arial, sans-serif;*/
+    color: #718096;
+    font-weight: 400;
 }
 
 .conditionValues {
     padding-left: 8px;
     font-size: 2em;
-    /*color: rgb(159 159 159);*/
-    font-weight: 400;
+    font-weight: 500;
+    color: #2d3748;
 }
 
 .unitNames {
     padding-left: 3px;
     padding-bottom: 4px;
-    color: #b6b6b6;
+    color: #a0aec0;
+    font-weight: 400;
 }
 
 .condition {
     padding-top: 4px;
-    color: #b6b6b6;
+    color: #718096;
+    font-weight: 500;
+    text-transform: capitalize;
 }
 
 
@@ -40,18 +45,23 @@
     .unitNames {
         padding-bottom: 3px;
     }
+
     .ancillaryValues {
         font-size: 1.4em;
     }
+
     .actualTemp {
         font-size: 3em;
     }
+
     .feelsLike {
         font-size: 0.75em;
     }
+
     .condition {
         font-size: 0.85em;
     }
+
     .skiesImg {
         height: 5em;
         width: 5em;

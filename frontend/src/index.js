@@ -60,7 +60,7 @@ function AppLayout({ config }) {
 
     const drawerStyles = {
         '& .MuiDrawer-paper': {
-            backgroundColor: '#1976d2',
+            background: 'linear-gradient(180deg, #1a365d 0%, #0d1f3c 100%)',
             color: '#fff',
             width: `${drawerWidth}px`
         },
@@ -83,7 +83,76 @@ function AppLayout({ config }) {
 
     let siteTheme = createTheme({
         palette: {
-            mode: "light",
+            mode: 'light',
+            primary: {
+                main: '#1a365d',
+                light: '#4a6fa5',
+                dark: '#0d1f3c',
+            },
+            secondary: {
+                main: '#38b2ac',
+                light: '#68d5c8',
+                dark: '#2c9a94',
+            },
+            background: {
+                default: '#edf2f7',
+                paper: '#ffffff',
+            },
+            text: {
+                primary: '#2d3748',
+                secondary: '#718096',
+            },
+        },
+        typography: {
+            fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+            h6: { fontWeight: 700, letterSpacing: '0.02em' },
+        },
+        shape: { borderRadius: 12 },
+        components: {
+            MuiButton: {
+                styleOverrides: {
+                    contained: {
+                        borderRadius: 8,
+                        textTransform: 'none',
+                        fontWeight: 600,
+                        boxShadow: 'none',
+                        '&:hover': { boxShadow: '0 4px 12px rgba(26, 54, 93, 0.3)' },
+                    },
+                },
+            },
+            MuiCard: {
+                styleOverrides: {
+                    root: {
+                        borderRadius: 16,
+                        boxShadow: '0 2px 16px rgba(0, 0, 0, 0.06)',
+                        transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                        '&:hover': {
+                            transform: 'translateY(-2px)',
+                            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.12)',
+                        },
+                    },
+                },
+            },
+            MuiTextField: {
+                styleOverrides: {
+                    root: {
+                        '& .MuiOutlinedInput-root': {
+                            borderRadius: 10,
+                            backgroundColor: '#ffffff',
+                        },
+                    },
+                },
+            },
+            MuiPaper: {
+                styleOverrides: {
+                    root: { borderRadius: 16 },
+                },
+            },
+            MuiAlert: {
+                styleOverrides: {
+                    root: { borderRadius: 10 },
+                },
+            },
         },
     });
     siteTheme = responsiveFontSizes(siteTheme);
@@ -96,6 +165,8 @@ function AppLayout({ config }) {
                     <AppBar component="nav" position="sticky"
                         sx={{
                             width: '100%',
+                            background: 'linear-gradient(135deg, #1a365d 0%, #2a5298 50%, #1a365d 100%)',
+                            boxShadow: '0 2px 12px rgba(26, 54, 93, 0.35)',
                         }}>
                         <Toolbar sx={{ paddingLeft: { xs: '2px !important', sm: '24px !important' } }}>
                             <Hidden smUp>

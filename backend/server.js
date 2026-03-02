@@ -62,8 +62,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        sameSite: isProd ? 'None' : 'Lax', // 'None' required for cross-site in prod; 'Lax' works over http in dev
-        secure: isProd,                     // secure: true required with sameSite:'None'; must be false on http localhost
+        sameSite: 'Lax',  // Firebase Hosting proxies /api/** to Cloud Run, so everything is same-origin
+        secure: isProd,   // true (HTTPS) in prod; false on http localhost
         httpOnly: true,
         maxAge: 10000 * 60 * 10
     }

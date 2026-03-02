@@ -1,9 +1,10 @@
 .foodSectionTitle {
-    font-weight: 900;
-    font-size: 20px;
-    letter-spacing: 0.3em;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     padding-left: 10px;
+    color: #1a365d;
 }
 
 @media screen and (max-width: 600px) {

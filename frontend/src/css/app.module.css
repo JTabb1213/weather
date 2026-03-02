@@ -11,7 +11,7 @@ body>div {
 
 body {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    background-color: rgba(243, 246, 249, 0.6) !important;
+    background-color: #edf2f7 !important;
 }
 
 
@@ -33,12 +33,12 @@ body {
 a {
     cursor: pointer;
     margin: 0px;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 0.875rem;
     line-height: 1.43;
     letter-spacing: 0.01071em;
-    color: rgb(25, 118, 210);
-    text-decoration: underline rgba(25, 118, 210, 0.4);
+    color: #1a365d;
+    text-decoration: underline rgba(26, 54, 93, 0.4);
 }
 
 .menuLinks {
@@ -53,9 +53,15 @@ a.menuLink {
     color: #fff !important;
     text-decoration: none !important;
     text-transform: uppercase;
-    padding: 6px 8px;
+    padding: 6px 12px;
     vertical-align: middle;
     min-width: 64px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+a.menuLink:hover {
+    background-color: rgba(255, 255, 255, 0.12);
 }
 
 .section {
@@ -172,6 +178,7 @@ h1 {
     overflow: hidden;
     cursor: pointer;
 }
+
 .overlayText {
     color: #f3f2ef;
     position: absolute;
@@ -184,6 +191,7 @@ h1 {
     transition: all 0.2s ease-out;
     transition-delay: 0.2s;
 }
+
 .overlay:after {
     display: inline-block;
     position: absolute;
@@ -197,9 +205,11 @@ h1 {
     transition: all 0.1s ease-out;
     height: 100%;
 }
+
 .overlay:hover:after {
     opacity: 0.7;
 }
+
 .overlay:hover .overlayText {
     transform: translateY(-50%);
     opacity: 1;
