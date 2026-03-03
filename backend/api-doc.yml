@@ -184,6 +184,22 @@ components:
         message:
           type: string
 paths:
+  /hello:
+    get:
+      tags:
+        - Health
+      description: Simple health check endpoint to verify backend deployment
+      operationId: hello
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
   /city-info:
     get:
       tags:

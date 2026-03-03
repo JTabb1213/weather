@@ -248,6 +248,12 @@ export default function App() {
     );
 }
 
+// Health check: verify backend deployment on page load
+fetch('/api/hello')
+    .then(res => res.json())
+    .then(data => console.log('[Backend Health Check]', data.message))
+    .catch(err => console.warn('[Backend Health Check] Failed to reach backend:', err));
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>

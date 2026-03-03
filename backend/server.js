@@ -108,6 +108,7 @@ initialize({
     app,
     apiDoc: './api-doc.yml',
     paths: [
+        { path: '/hello', module: require('./paths/hello') },
         { path: '/weather/{id}', module: require('./paths/weather') },
         { path: '/weather', module: require('./paths/weather') },
         { path: '/map', module: require('./paths/map') },
