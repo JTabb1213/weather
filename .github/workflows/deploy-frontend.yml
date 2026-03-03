@@ -30,8 +30,6 @@ jobs:
         run: npm run build
         working-directory: frontend
 
-      # Requires firebase.json in ./frontend — run `firebase init hosting`
-      # inside the frontend/ folder once to generate it, then commit it.
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

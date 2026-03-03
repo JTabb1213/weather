@@ -9,8 +9,8 @@ on:
 
 env:
   REGION: us-central1
-  SERVICE: backend
-  IMAGE: us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/backend
+  SERVICE: my-api
+  IMAGE: us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/my-api
 
 jobs:
   deploy:
