@@ -58,6 +58,7 @@ const isProd = process.env.NODE_ENV !== 'development';
 //Configure session middleware
 app.use(session({
     store: new RedisStore({ client: redisClient, prefix: 'weatherApp:sess:' }),
+    name: '__session',  // Firebase Hosting only forwards the __session cookie to Cloud Run; all others are stripped
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
