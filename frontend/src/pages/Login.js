@@ -100,7 +100,7 @@ export default function Login() {
                             label="Password" variant="outlined" />
                     </Grid>
                     <Grid item xs={12}>
-                        <Button fullWidth variant="contained" onClick={onButtonClick}>SIGN IN</Button>
+                        <Button fullWidth variant="contained" onClick={onButtonClick}>ENTER</Button>
                     </Grid>
                     <Grid container item xs={12} direction="row" spacing={1}>
                         <Grid item xs={12} md={6} container justifyContent="start">
